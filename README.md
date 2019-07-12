@@ -1,4 +1,4 @@
-![./screenshot.png](./screenshot.png)
+![https://raw.githubusercontent.com/mizy/ant-cron/master/screenshot.png]()
 
 # ant-cron
 1.基于antd react组件的cron表达式生成工具
@@ -6,7 +6,7 @@
 
 # 安装
 ```
-npm i ant-cron --save
+npm i antd-cron --save
 ```
 
 # 使用

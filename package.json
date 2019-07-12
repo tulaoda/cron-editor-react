@@ -1,11 +1,11 @@
 {
   "name": "antd-cron",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "cron react maker",
-  "main": "./dist/index.js",
+  "main": "./dist/index",
   "scripts": {
 	"start": "webpack-dev-server",
-	"build": "webpack -p"
+	"build": "webpack -p --config ./webpack.config.build.js"
   },
   "keywords": [
     "cron",

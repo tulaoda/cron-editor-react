@@ -8,7 +8,7 @@ import Hour from "./Content/Hour";
 import Minute from "./Content/Minute";
 import Second from "./Content/Second";
 const {TabPane} = Tabs;
-export default class Cron extends PureComponent {
+class Cron extends PureComponent {
 	constructor(props) {
 		super(props);
 		const date = new Date();
@@ -407,3 +407,4 @@ export default class Cron extends PureComponent {
 		</div>;
 	}
 }
+export default Cron; 

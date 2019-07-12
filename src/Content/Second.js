@@ -2,7 +2,7 @@
  * @Author: 苗壮
  * @Date: 2019-06-28 16:47:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-07-12 10:30:34
+ * @LastEditTime: 2019-07-12 15:39:49
  */
 import React, { PureComponent } from "react";
 import {Radio, InputNumber, message, List, Checkbox} from "antd";
@@ -54,12 +54,19 @@ export default class Second extends PureComponent {
 						<List.Item>
 							<Radio value="beginInterval"></Radio>
 							从第 &nbsp;<InputNumber min={0} defaultValue={0} placeholder="秒" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} /> &nbsp;秒开始，
-							每 &nbsp;<InputNumber min={0} defaultValue={1} placeholder="秒" size="small" value={beginEvery} onChange={(value)=>{this.changeParams("beginEvery", value);}} /> &nbsp;秒执行一次
+							每 &nbsp;<InputNumber 
+								min={0} 
+								defaultValue={1}
+								placeholder="秒" 
+								size="small" 
+								value={beginEvery} 
+								onChange={(value)=>{this.changeParams("beginEvery", value);}} 
+							/> &nbsp;秒执行一次
 						</List.Item>
 						<List.Item>
 							<Radio value="some">指定</Radio>
 							<Checkbox.Group value={some} onChange={(value)=>{
-								if (value.length < 1) {
+								if (value.length < 1) { 
 									return message.warn("至少选择一项");
 								}
 								this.changeParams("some", value);

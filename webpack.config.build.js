@@ -1,21 +1,17 @@
-const webpack = require("webpack"); 
 let webpackConfig = {
-	entry: "./test.js",
+	entry: "./src/index.js",
 	output:{
 		filename:"index.js",
-		publicPath:"/"
+		library:"antd-cron",
+		libraryTarget: 'umd',
+		libraryExport: 'default', // 默认导出
 	},
-	mode:"development",
-	devtool: "cheap-module-eval-source-map" ,
-	devServer: {
-		port: 7979,
-		open: true,
-		host: "0.0.0.0",
-		openPage: "./test.html",
-		hot: true,
-		publicPath:"/"
+	externals: {
+		react: 'react', //打包时候排除react
+		antd:"antd",
+		reactDom:'react-dom',
+		moment:'moment'
 	},
-	
 	module: {
 		rules: [
 			{
@@ -62,9 +58,5 @@ let webpackConfig = {
 			}
 		]
 	},
-	 
-	plugins: [
-		new webpack.HotModuleReplacementPlugin()
-	]
 }; 
 module.exports = webpackConfig;
