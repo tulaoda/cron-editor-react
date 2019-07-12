@@ -1,5 +1,5 @@
 {
-  "name": "ant-cron",
+  "name": "antd-cron",
   "version": "1.0.0",
   "description": "cron react maker",
   "main": "./src/index.js",
