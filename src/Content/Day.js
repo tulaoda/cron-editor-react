@@ -2,7 +2,7 @@
  * @Author: 苗壮
  * @Date: 2019-06-28 16:47:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-07-08 10:31:56
+ * @LastEditTime: 2019-07-12 10:36:06
  */
 import React, { PureComponent } from "react";
 import {Radio, InputNumber, Row, Col, Select, List, Checkbox} from "antd";
@@ -52,18 +52,18 @@ export default class Day extends PureComponent {
 						</List.Item>
 						<List.Item style={{marginBottom: 5}}>
 							<Radio value="period">周期</Radio>
-						 从 <InputNumber min={0} style={{width: 80}} placeholder="日" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} />
+						 从 <InputNumber min={1} max={31} defaultValue={1} style={{width: 80}} placeholder="日" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} />
 							 {" "}到{" "}
-							<InputNumber min={0} style={{width: 80}} placeholder="日" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} />
+							<InputNumber min={1} max={31} defaultValue={2}  style={{width: 80}} placeholder="日" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} />
 						</List.Item>
 						<List.Item>
 							<Radio value="beginInterval"></Radio>
-							从第{" "}<InputNumber min={0} placeholder="日" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />{" "}日开始，
-							每{" "}<InputNumber min={0} placeholder="天" size="small" value={beginEvery} onChange={(value)=>{this.changeParams("beginEvery", value);}} />&nbsp;天执行一次
+							从第{" "}<InputNumber min={1} defaultValue={1} placeholder="日" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />{" "}日开始，
+							每{" "}<InputNumber min={1} defaultValue={1} placeholder="天" size="small" value={beginEvery} onChange={(value)=>{this.changeParams("beginEvery", value);}} />&nbsp;天执行一次
 						</List.Item>
 						<List.Item style={{marginBottom: 5}}>
 							<Radio value="closeWorkDay"></Radio>
-							每月{" "}<InputNumber min={0} placeholder="日" size="small" value={closeWorkDay} onChange={(value)=>{this.changeParams("closeWorkDay", value);}} />&nbsp;日最近的那个工作日
+							每月{" "}<InputNumber min={1}  defaultValue={1} placeholder="日" size="small" value={closeWorkDay} onChange={(value)=>{this.changeParams("closeWorkDay", value);}} />&nbsp;日最近的那个工作日
 						</List.Item>
 						<List.Item style={{marginBottom: 5}}>
 							<Radio value="last">本月最后{" "}<InputNumber min={0} placeholder="天" size="small" value={last} onChange={(value)=>{this.changeParams("last", value);}} />{" "}天</Radio>

@@ -2,7 +2,7 @@
  * @Author: 苗壮
  * @Date: 2019-06-28 16:47:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-07-08 10:31:59
+ * @LastEditTime: 2019-07-12 10:30:53
  */
 import React, { PureComponent } from "react";
 import {Radio, InputNumber, message, List, Checkbox} from "antd";
@@ -48,14 +48,14 @@ export default class Hour extends PureComponent {
 						</List.Item>
 						<List.Item style={{marginBottom: 5}}>
 							<Radio value="period">周期</Radio>
-						 从 <InputNumber min={0} style={{width: 80}} placeholder="时" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} />
+						 从 <InputNumber min={0} max={24} defaultValue={0} style={{width: 80}} placeholder="时" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} />
 							 到
-							<InputNumber min={0} style={{width: 80}} placeholder="时" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} />
+							<InputNumber min={0} max={24} defaultValue={24} style={{width: 80}} placeholder="时" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} />
 						</List.Item>
 						<List.Item>
 							<Radio value="beginInterval"></Radio>
-							从第<InputNumber min={0} placeholder="时" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />时开始，
-							每<InputNumber min={0} placeholder="小时" size="small" value={beginEvery} onChange={(value)=>{this.changeParams("beginEvery", value);}} />时执行一次
+							从第<InputNumber min={0} max={24} defaultValue={0} placeholder="时" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />时开始，
+							每<InputNumber min={0} max={24} defaultValue={1} placeholder="小时" size="small" value={beginEvery} onChange={(value)=>{this.changeParams("beginEvery", value);}} />时执行一次
 						</List.Item>
 						<List.Item>
 							<Radio value="some">指定</Radio>

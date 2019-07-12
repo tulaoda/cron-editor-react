@@ -2,7 +2,7 @@
  * @Author: 苗壮
  * @Date: 2019-06-28 16:47:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-07-08 10:32:09
+ * @LastEditTime: 2019-07-12 10:43:56
  */
 import React, { PureComponent } from "react";
 import {Radio, InputNumber, Row, Col, Select, List, Checkbox} from "antd";
@@ -66,29 +66,29 @@ export default class Week extends PureComponent {
 						</List.Item>
 						<List.Item style={{marginBottom: 5}}>
 							<Radio value="period">周期</Radio>
-						从 <Select style={{width: 80}} placeholder="周" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} >
+						从 <Select style={{width: 80}} defaultValue={"1"} placeholder="周" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} >
 								{this.getWeekOptions()}
 							</Select> 到{" "}
-							 <Select style={{width: 80}} placeholder="周" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} >
+							 <Select style={{width: 80}}  defaultValue={"2"} placeholder="周" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} >
 								{this.getWeekOptions()}
 							</Select>
 						</List.Item>
 						<List.Item>
 							<Radio value="beginInterval"></Radio>
-							第{" "}<InputNumber min={0} placeholder="周" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />{" "}周的
-							{" "}<Select style={{width: 80}} placeholder="星期" value={beginEvery} size="small" onChange={(value)=>{this.changeParams("beginEvery", value);}} >
+							第{" "}<InputNumber min={1} defaultValue={1} placeholder="周" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />{" "}周的
+							{" "}<Select style={{width: 80}} defaultValue={"1"} placeholder="星期" value={beginEvery} size="small" onChange={(value)=>{this.changeParams("beginEvery", value);}} >
 								{this.getWeekOptions()}
 							</Select>
 						</List.Item>
 						<List.Item style={{marginBottom: 5}}>
 							<Radio value="last"></Radio>
-						本月最后一个<Select style={{width: 80}} placeholder="星期" size="small" value={last} onChange={(value)=>{this.changeParams("last", value);}} >
+						本月最后一个<Select style={{width: 80}} defaultValue={1}  placeholder="星期" size="small" value={last} onChange={(value)=>{this.changeParams("last", value);}} >
 								{this.getWeekOptions()}
 							</Select>
 						</List.Item>
 						<List.Item>
 							<Radio value="some">指定</Radio>
-							<Checkbox.Group value={some} onChange={(value)=>{this.changeParams("some", value);}} options={this.weekOptions} />
+							<Checkbox.Group value={some} defaultValue="1"  onChange={(value)=>{this.changeParams("some", value);}} options={this.weekOptions} />
 						</List.Item>
 					</List>
 				</Group>

@@ -2,7 +2,7 @@
  * @Author: 苗壮
  * @Date: 2019-06-28 16:47:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-07-08 10:32:13
+ * @LastEditTime: 2019-07-12 10:45:00
  */
 import React, { PureComponent } from "react";
 import {Radio, InputNumber, Row, Col, List} from "antd";
@@ -29,11 +29,10 @@ export default class Year extends PureComponent {
 						</List.Item>
 						<List.Item>
 							<Radio value="period">周期</Radio>
-							<InputNumber min={0} value={start} placeholder="年" onChange={(value)=>{this.changeParams("start", value);}} />{" - "}
-							<InputNumber min={0} endYear={end} placeholder="年" onChange={(value)=>{this.changeParams("end", value);}} />
+							<InputNumber min={0} defaultValue={2018} value={start} placeholder="年" onChange={(value)=>{this.changeParams("start", value);}} />{" - "}
+							<InputNumber min={0} defaultValue={2019} endYear={end} placeholder="年" onChange={(value)=>{this.changeParams("end", value);}} />
 						</List.Item>
 					</List>
-
 				</Group>
 			</div>
 		);
