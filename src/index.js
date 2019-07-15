@@ -250,7 +250,7 @@ class Cron extends PureComponent {
 		} else if (week.type === "beginInterval") {
 			week.value = `${week.begin || ""}#${week.beginEvery || ""}`;
 		} else if (week.type === "last") {
-			week.value = week.last + "L";
+			week.value = week.last || "" + "L";
 		} else if (week.type === "some") {
 			week.value = week.some.join(",");
 		} else {
@@ -261,9 +261,9 @@ class Cron extends PureComponent {
 		} else if (day.type === "beginInterval") {
 			day.value = `${day.begin || ""}/${day.beginEvery || ""}`;
 		} else if (day.type === "closeWorkDay") {
-			day.value = day.closeWorkDay + "W";
+			day.value = day.closeWorkDay||"" + "W";
 		} else if (day.type === "last") {
-			day.value = day.last + "L";
+			day.value = day.last||"" + "L";
 		} else if (day.type === "some") {
 			day.value = day.some.join(",");
 		} else {
