@@ -230,67 +230,68 @@ class Cron extends PureComponent {
 
 	// 计算用户的cron
 	culcCron() {
+		const {n2s} = this;
 		let {year, month, week, day, hour, minute, second} = this.state;
 		if (year.type === "period") {
-			year.value = `${year.start || ""}-${year.end || ""}`;
+			year.value = `${n2s(year.start)}-${n2s(year.end)}`;
 		} else {
 			year.value = year.type;
 		}
 		if (month.type === "period") {
-			month.value = `${month.start || ""}-${month.end || ""}`;
+			month.value = `${n2s(month.start)}-${n2s(month.end)}`;
 		} else if (month.type === "beginInterval") {
-			month.value = `${month.begin || ""}/${month.beginEvery || ""}`;
+			month.value = `${n2s(month.begin)}/${n2s(month.beginEvery)}`;
 		} else if (month.type === "some") {
 			month.value = month.some.join(",");
 		} else {
 			month.value = month.type;
 		}
 		if (week.type === "period") {
-			week.value = `${week.start || ""}-${week.end || ""}`;
+			week.value = `${n2s(week.start)}-${n2s(week.end)}`;
 		} else if (week.type === "beginInterval") {
-			week.value = `${week.begin || ""}#${week.beginEvery || ""}`;
+			week.value = `${n2s(week.begin)}#${n2s(week.beginEvery)}`;
 		} else if (week.type === "last") {
-			week.value = week.last || "" + "L";
+			week.value = n2s(week.last) + "L";
 		} else if (week.type === "some") {
 			week.value = week.some.join(",");
 		} else {
 			week.value = week.type;
 		}
 		if (day.type === "period") {
-			day.value = `${day.start || ""}-${day.end || ""}`;
+			day.value = `${n2s(day.start)}-${n2s(day.end)}`;
 		} else if (day.type === "beginInterval") {
-			day.value = `${day.begin || ""}/${day.beginEvery || ""}`;
+			day.value = `${n2s(day.begin)}/${n2s(day.beginEvery)}`;
 		} else if (day.type === "closeWorkDay") {
-			day.value = day.closeWorkDay||"" + "W";
+			day.value = n2s(day.closeWorkDay) + "W";
 		} else if (day.type === "last") {
-			day.value = day.last||"" + "L";
+			day.value = n2s(day.last) + "L";
 		} else if (day.type === "some") {
 			day.value = day.some.join(",");
 		} else {
 			day.value = day.type;
 		}
 		if (hour.type === "period") {
-			hour.value = `${hour.start || ""}-${hour.end || ""}`;
+			hour.value = `${n2s(hour.start)}-${n2s(hour.end)}`;
 		} else if (hour.type === "beginInterval") {
-			hour.value = `${hour.begin || ""}/${hour.beginEvery || ""}`;
+			hour.value = `${n2s(hour.begin)}/${n2s(hour.beginEvery)}`;
 		} else if (hour.type === "some") {
 			hour.value = hour.some.join(",");
 		} else {
 			hour.value = hour.type;
 		}
 		if (minute.type === "period") {
-			minute.value = `${minute.start || ""}-${minute.end || ""}`;
+			minute.value = `${n2s(minute.start)}-${n2s(minute.end)}`;
 		} else if (minute.type === "beginInterval") {
-			minute.value = `${minute.begin || ""}/${minute.beginEvery || ""}`;
+			minute.value = `${n2s(minute.begin)}/${n2s(minute.beginEvery)}`;
 		} else if (minute.type === "some") {
 			minute.value = minute.some.join(",");
 		} else {
 			minute.value = minute.type;
 		}
 		if (second.type === "period") {
-			second.value = `${second.start || ""}-${second.end || ""}`;
+			second.value = `${n2s(second.start)}-${n2s(second.end)}`;
 		} else if (second.type === "beginInterval") {
-			second.value = `${second.begin || ""}/${second.beginEvery || ""}`;
+			second.value = `${n2s(second.begin)}/${n2s(second.beginEvery)}`;
 		} else if (second.type === "some") {
 			second.value = second.some.join(",");
 		} else {
@@ -300,6 +301,13 @@ class Cron extends PureComponent {
 			this.triggerChange();
 		});
 
+	}
+
+	n2s(number){
+		if(typeof number === 'number'&&number!==NaN){
+			return `${number}`
+		}
+		return number
 	}
 
 	triggerChange() {
