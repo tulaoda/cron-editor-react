@@ -5,10 +5,10 @@
  * @LastEditTime: 2019-07-12 10:43:56
  */
 import React, { PureComponent } from "react";
-import {Radio, InputNumber, Row, Col, Select, List, Checkbox} from "antd";
-const {Group} = Radio;
+import { Radio, InputNumber, Row, Col, Select, List, Checkbox } from "antd";
+const { Group } = Radio;
 export default class Week extends PureComponent {
-	weekOptions=[{
+	weekOptions = [{
 		label: "星期一",
 		value: "1"
 	}, {
@@ -32,7 +32,7 @@ export default class Week extends PureComponent {
 	}]
 
 	getWeekOptions() {
-		return this.weekOptions.map((item,index)=>{
+		return this.weekOptions.map((item, index) => {
 			return <Select.Option value={item.value} key={`${item.label}-${index}`}>
 				{item.label}
 			</Select.Option>;
@@ -40,17 +40,17 @@ export default class Week extends PureComponent {
 	}
 
 	changeParams(type, value) {
-		const state = {...this.props.week};
+		const state = { ...this.props.week };
 		state[type] = value;
 		this.props.onChange(state);
 	}
 
 	render() {
-		const {week: {type, start, end, some, begin, beginEvery, last}} = this.props;
+		const { week: { type, start, end, some, begin, beginEvery, last } } = this.props;
 		return (
 			<div >
-				<Group value={type} onChange={(e)=>{
-					const state = {...this.props.week};
+				<Group value={type} onChange={(e) => {
+					const state = { ...this.props.week };
 					if (e.target.value === "some") {
 						state.some = ["1"];
 					}
@@ -64,31 +64,31 @@ export default class Week extends PureComponent {
 						<List.Item>
 							<Radio value="?">不指定</Radio>
 						</List.Item>
-						<List.Item style={{marginBottom: 5}}>
+						<List.Item style={{ marginBottom: 5 }}>
 							<Radio value="period">周期</Radio>
-						从 <Select style={{width: 80}} defaultValue={"1"} placeholder="周" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} >
+							从 <Select style={{ width: 80 }} defaultValue={"1"} placeholder="周" size="small" value={start} onChange={(value) => { this.changeParams("start", value); }} >
 								{this.getWeekOptions()}
 							</Select> 到{" "}
-							 <Select style={{width: 80}}  defaultValue={"2"} placeholder="周" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} >
+							<Select style={{ width: 80 }} defaultValue={"2"} placeholder="周" value={end} size="small" onChange={(value) => { this.changeParams("end", value); }} >
 								{this.getWeekOptions()}
 							</Select>
 						</List.Item>
 						<List.Item>
 							<Radio value="beginInterval"></Radio>
-							第{" "}<InputNumber min={1} defaultValue={1} placeholder="周" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />{" "}周的
-							{" "}<Select style={{width: 80}} defaultValue={"1"} placeholder="星期" value={beginEvery} size="small" onChange={(value)=>{this.changeParams("beginEvery", value);}} >
+							第{" "}<InputNumber min={1} defaultValue={1} placeholder="周" size="small" value={begin} onChange={(value) => { this.changeParams("begin", value); }} />{" "}周的
+							{" "}<Select style={{ width: 80 }} defaultValue={"1"} placeholder="星期" value={beginEvery} size="small" onChange={(value) => { this.changeParams("beginEvery", value); }} >
 								{this.getWeekOptions()}
 							</Select>
 						</List.Item>
-						<List.Item style={{marginBottom: 5}}>
+						<List.Item style={{ marginBottom: 5 }}>
 							<Radio value="last"></Radio>
-						本月最后一个<Select style={{width: 80}} defaultValue={1}  placeholder="星期" size="small" value={last} onChange={(value)=>{this.changeParams("last", value);}} >
+							本月最后一个<Select style={{ width: 80 }} defaultValue={1} placeholder="星期" size="small" value={last} onChange={(value) => { this.changeParams("last", value); }} >
 								{this.getWeekOptions()}
 							</Select>
 						</List.Item>
 						<List.Item>
 							<Radio value="some">指定</Radio>
-							<Checkbox.Group value={some} defaultValue="1"  onChange={(value)=>{this.changeParams("some", value);}} options={this.weekOptions} />
+							<Checkbox.Group value={some} defaultValue="1" onChange={(value) => { this.changeParams("some", value); }} options={this.weekOptions} />
 						</List.Item>
 					</List>
 				</Group>

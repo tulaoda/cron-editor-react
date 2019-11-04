@@ -1,7 +1,7 @@
 {
-  "name": "antd-cron",
-  "version": "1.0.9",
-  "description": "cron react maker",
+  "name": "cron-editor-react",
+  "version": "1.0.1",
+  "description": "cron react parse",
   "main": "./dist/index",
   "scripts": {
     "start": "webpack-dev-server",
@@ -12,7 +12,7 @@
     "react",
     "js"
   ],
-  "author": "mizy.mz",
+  "author": "tulaoda",
   "license": "MIT",
   "dependencies": {
     "antd": "^3.9.3",

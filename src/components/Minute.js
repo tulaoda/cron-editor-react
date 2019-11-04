@@ -5,8 +5,8 @@
  * @LastEditTime: 2019-07-12 10:30:23
  */
 import React, { PureComponent } from "react";
-import {Radio, InputNumber, message, List, Checkbox} from "antd";
-const {Group} = Radio;
+import { Radio, InputNumber, message, List, Checkbox } from "antd";
+const { Group } = Radio;
 export default class Minute extends PureComponent {
 	constructor(props) {
 		super(props);
@@ -15,7 +15,7 @@ export default class Minute extends PureComponent {
 
 	formatMinuteOptions() {
 		this.minuteOptions = [];
-		for (let x = 0 ;x < 60;x++) {
+		for (let x = 0; x < 60; x++) {
 			this.minuteOptions.push({
 				label: x < 10 ? `0${x}` : x,
 				value: `${x}`
@@ -24,13 +24,13 @@ export default class Minute extends PureComponent {
 	}
 
 	changeParams(type, value) {
-		const state = {...this.props.minute};
+		const state = { ...this.props.minute };
 		state[type] = value;
 		this.props.onChange(state);
 	}
 
-	changeType=(e)=>{
-		const state = {...this.props.minute};
+	changeType = (e) => {
+		const state = { ...this.props.minute };
 		if (e.target.value === "some") {
 			state.some = ["1"];
 		}
@@ -39,7 +39,7 @@ export default class Minute extends PureComponent {
 	}
 
 	render() {
-		const {minute: {type, start, end, some, begin, beginEvery}} = this.props;
+		const { minute: { type, start, end, some, begin, beginEvery } } = this.props;
 		return (
 			<div >
 				<Group value={type} onChange={this.changeType} >
@@ -47,20 +47,20 @@ export default class Minute extends PureComponent {
 						<List.Item>
 							<Radio value="*">每分钟</Radio>
 						</List.Item>
-						<List.Item style={{marginBottom: 5}}>
+						<List.Item style={{ marginBottom: 5 }}>
 							<Radio value="period">周期</Radio>
-						 从&nbsp;<InputNumber min={0} max={60} defaultValue={0}  style={{width: 80}} placeholder="分" size="small" value={start} onChange={(value)=>{this.changeParams("start", value);}} />
-							 &nbsp;到&nbsp;
-							<InputNumber min={0} max={60}  defaultValue={60} style={{width: 80}} placeholder="分" value={end} size="small" onChange={(value)=>{this.changeParams("end", value);}} />
+							从&nbsp;<InputNumber min={0} max={60} defaultValue={0} style={{ width: 80 }} placeholder="分" size="small" value={start} onChange={(value) => { this.changeParams("start", value); }} />
+							&nbsp;到&nbsp;
+							<InputNumber min={0} max={60} defaultValue={60} style={{ width: 80 }} placeholder="分" value={end} size="small" onChange={(value) => { this.changeParams("end", value); }} />
 						</List.Item>
 						<List.Item>
 							<Radio value="beginInterval"></Radio>
-							从第&nbsp;<InputNumber min={0}  defaultValue={0} placeholder="分" size="small" value={begin} onChange={(value)=>{this.changeParams("begin", value);}} />&nbsp;分开始，
-							每&nbsp;<InputNumber min={0}  defaultValue={1} placeholder="分" size="small" value={beginEvery} onChange={(value)=>{this.changeParams("beginEvery", value);}} />&nbsp;分执行一次
+							从第&nbsp;<InputNumber min={0} defaultValue={0} placeholder="分" size="small" value={begin} onChange={(value) => { this.changeParams("begin", value); }} />&nbsp;分开始，
+							每&nbsp;<InputNumber min={0} defaultValue={1} placeholder="分" size="small" value={beginEvery} onChange={(value) => { this.changeParams("beginEvery", value); }} />&nbsp;分执行一次
 						</List.Item>
 						<List.Item>
 							<Radio value="some">指定</Radio>
-							<Checkbox.Group value={some} onChange={(value)=>{
+							<Checkbox.Group value={some} onChange={(value) => {
 								if (value.length < 1) {
 									return message.warn("至少选择一项");
 								};
