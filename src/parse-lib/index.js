@@ -1,3 +1,9 @@
+/**
+ * 功能：解析cron类
+ * 作者：宋鑫鑫
+ * 日期：2019.11.04
+ */
+
 class CronParse {
     constructor() {
         // constructor是一个构造方法，用来接收参数

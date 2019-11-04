@@ -1,3 +1,8 @@
+/**
+ * 功能：主界面
+ * 作者：宋鑫鑫
+ * 日期：2019.11.04
+ */
 import React, { PureComponent } from "react";
 import { Tabs, Dropdown, Row, Col, Input, List, Collapse } from "antd";
 import Year from "./components/Year";

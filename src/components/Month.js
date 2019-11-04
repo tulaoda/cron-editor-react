@@ -1,8 +1,7 @@
-/*
- * @Author: 苗壮
- * @Date: 2019-06-28 16:47:08
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-07-12 10:37:01
+/**
+ * 功能：周期-月
+ * 作者：宋鑫鑫
+ * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
 import { Radio, InputNumber, Row, Col, List, Checkbox } from "antd";
