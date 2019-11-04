@@ -1,17 +1,18 @@
 import React, { PureComponent } from "react";
 import { Tabs, Dropdown, Row, Col, Input, List, Collapse } from "antd";
-import Year from "./Content/Year";
-import Month from "./Content/Month";
-import Week from "./Content/Week";
-import Day from "./Content/Day";
-import Hour from "./Content/Hour";
-import Minute from "./Content/Minute";
-import Second from "./Content/Second";
+import Year from "./components/Year";
+import Month from "./components/Month";
+import Week from "./components/Week";
+import Day from "./components/Day";
+import Hour from "./components/Hour";
+import Minute from "./components/Minute";
+import Second from "./components/Second";
 import CronParse from './parse-lib/index'
 import CronParser from "cron-parser"
 import moment from 'moment'
 const { TabPane } = Tabs;
 const { Panel } = Collapse
+import './css/index.less'
 
 const dateMinute = 'YYYY-MM-DD HH:mm'
 

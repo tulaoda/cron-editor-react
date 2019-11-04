@@ -4,8 +4,8 @@
   "description": "cron react maker",
   "main": "./dist/index",
   "scripts": {
-	"start": "webpack-dev-server",
-	"build": "webpack -p --config ./webpack.config.build.js"
+    "start": "webpack-dev-server",
+    "build": "webpack -p --config ./webpack.config.build.js"
   },
   "keywords": [
     "cron",
@@ -18,7 +18,8 @@
     "antd": "^3.9.3",
     "moment": "^2.19.1",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "cron-parser": "^2.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
