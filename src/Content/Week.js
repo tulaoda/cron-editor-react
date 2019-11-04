@@ -32,8 +32,8 @@ export default class Week extends PureComponent {
 	}]
 
 	getWeekOptions() {
-		return this.weekOptions.map(item=>{
-			return <Select.Option value={item.value}>
+		return this.weekOptions.map((item,index)=>{
+			return <Select.Option value={item.value} key={`${item.label}-${index}`}>
 				{item.label}
 			</Select.Option>;
 		});
