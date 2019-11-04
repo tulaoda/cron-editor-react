@@ -7,7 +7,7 @@
 
 # 安装
 ```
-npm i antd-cron --save
+npm i cron-editor-react --save
 ```
 
 # 使用
