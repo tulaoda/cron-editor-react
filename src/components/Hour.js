@@ -28,7 +28,7 @@ export default class Hour extends PureComponent {
 		this.props.onChange(state);
 	}
 
-	changeType = (e) => {
+	changeType = e => {
 		const state = { ...this.props.month };
 		if (e.target.value === "some") {
 			state.some = ["1"];
@@ -36,34 +36,91 @@ export default class Hour extends PureComponent {
 		state.type = e.target.value;
 		this.props.onChange(state);
 	}
+
 	render() {
-		const { hour: { type, start, end, begin, some, beginEvery } } = this.props;
+		const {
+			hour: { type, start, end, begin, some, beginEvery }
+		} = this.props;
 		return (
-			<div >
-				<Group value={type} onChange={this.changeType} >
-					<List size="small" bordered >
+			<div>
+				<Group value={type} onChange={this.changeType}>
+					<List size="small" bordered>
 						<List.Item>
 							<Radio value="*">每小时</Radio>
 						</List.Item>
 						<List.Item style={{ marginBottom: 5 }}>
-							<Radio value="period">周期</Radio>
-							从 <InputNumber min={0} max={24} defaultValue={0} style={{ width: 80 }} placeholder="时" size="small" value={start} onChange={(value) => { this.changeParams("start", value); }} />
+							<Radio value="period">周期</Radio>从{" "}
+							<InputNumber
+								min={0}
+								max={24}
+								defaultValue={0}
+								style={{ width: 80 }}
+								placeholder="时"
+								size="small"
+								value={start}
+								onChange={value => {
+									this.changeParams("start", value);
+								}}
+								disabled={type !== "period"}
+							/>
 							到
-							<InputNumber min={0} max={24} defaultValue={24} style={{ width: 80 }} placeholder="时" value={end} size="small" onChange={(value) => { this.changeParams("end", value); }} />
+                            <InputNumber
+								min={0}
+								max={24}
+								defaultValue={24}
+								style={{ width: 80 }}
+								placeholder="时"
+								value={end}
+								size="small"
+								onChange={value => {
+									this.changeParams("end", value);
+								}}
+								disabled={type !== "period"}
+							/>
 						</List.Item>
 						<List.Item>
 							<Radio value="beginInterval"></Radio>
-							从第<InputNumber min={0} max={24} defaultValue={0} placeholder="时" size="small" value={begin} onChange={(value) => { this.changeParams("begin", value); }} />时开始，
-							每<InputNumber min={0} max={24} defaultValue={1} placeholder="小时" size="small" value={beginEvery} onChange={(value) => { this.changeParams("beginEvery", value); }} />时执行一次
-						</List.Item>
+							从第
+                            <InputNumber
+								min={0}
+								max={24}
+								defaultValue={0}
+								placeholder="时"
+								size="small"
+								value={begin}
+								onChange={value => {
+									this.changeParams("begin", value);
+								}}
+								disabled={type !== "beginInterval"}
+							/>
+							时开始， 每
+                            <InputNumber
+								min={0}
+								max={24}
+								defaultValue={1}
+								placeholder="小时"
+								size="small"
+								value={beginEvery}
+								onChange={value => {
+									this.changeParams("beginEvery", value);
+								}}
+								disabled={type !== "beginInterval"}
+							/>
+							时执行一次
+                        </List.Item>
 						<List.Item>
 							<Radio value="some">指定</Radio>
-							<Checkbox.Group value={some} onChange={(value) => {
-								if (value.length < 1) {
-									return message.warn("至少选择一项");
-								};
-								this.changeParams("some", value);
-							}} options={this.hourOptions} />
+							<Checkbox.Group
+								value={some}
+								onChange={value => {
+									if (value.length < 1) {
+										return message.warn("至少选择一项");
+									}
+									this.changeParams("some", value);
+								}}
+								options={this.hourOptions}
+								disabled={type !== "some"}
+							/>
 						</List.Item>
 					</List>
 				</Group>

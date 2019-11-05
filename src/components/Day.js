@@ -52,8 +52,7 @@ export default class Day extends PureComponent {
                             <Radio value="?">不指定</Radio>
                         </List.Item>
                         <List.Item style={{ marginBottom: 5 }}>
-                            <Radio value="period">周期</Radio>
-                            从{" "}
+                            <Radio value="period">周期</Radio>从{" "}
                             <InputNumber
                                 min={1}
                                 max={31}
