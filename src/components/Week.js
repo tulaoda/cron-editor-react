@@ -64,9 +64,9 @@ export default class Week extends PureComponent {
                     value={type}
                     onChange={e => {
                         const state = { ...this.props.week };
-                        if (e.target.value === "some") {
-                            state.some = ["1"];
-                        }
+                        // if (e.target.value === "some") {
+                        //     state.some = ["1"];
+                        // }
                         state.type = e.target.value;
                         this.props.onChange(state);
                     }}
@@ -105,13 +105,14 @@ export default class Week extends PureComponent {
                                 }}
                                 disabled={type !== "period"}
                             >
-                                {this.getWeekOptions()}
+                                {this.getWeekOptions().slice(1, 7)}
                             </Select>
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>第{" "}
                             <InputNumber
                                 min={1}
+                                max={4}
                                 defaultValue={1}
                                 placeholder="周"
                                 size="small"
@@ -157,7 +158,7 @@ export default class Week extends PureComponent {
                             <Radio value="some">具体星期数（可多选）</Radio>
                             <Select
                                 style={{ width: "auto" }}
-                                defaultValue={1}
+                                defaultValue="1"
                                 mode="multiple"
                                 placeholder="星期数"
                                 size="small"

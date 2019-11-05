@@ -44,9 +44,9 @@ export default class Day extends PureComponent {
 
     changeType = e => {
         const state = { ...this.props.month };
-        if (e.target.value === "some") {
-            state.some = ["1"];
-        }
+        // if (e.target.value === "some") {
+        //     state.some = ["1"];
+        // }
         state.type = e.target.value;
         this.props.onChange(state);
     };
