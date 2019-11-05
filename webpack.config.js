@@ -19,7 +19,7 @@ let webpackConfig = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 use: [
                     {
@@ -58,7 +58,9 @@ let webpackConfig = {
             }
         ]
     },
-
+    resolve: {
+        extensions: [".js", ".jsx"]
+    },
     plugins: [new webpack.HotModuleReplacementPlugin()]
 };
 module.exports = webpackConfig;
