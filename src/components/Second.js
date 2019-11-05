@@ -52,9 +52,9 @@ export default class Second extends PureComponent {
                     value={type}
                     onChange={e => {
                         const state = { ...this.props.second };
-                        if (e.target.value !== "some") {
-                            state.some = ["0"];
-                        }
+                        // if (e.target.value !== "some") {
+                        //     state.some = ["0"];
+                        // }
                         state.type = e.target.value;
                         this.props.onChange(state);
                     }}
@@ -67,9 +67,9 @@ export default class Second extends PureComponent {
                             <Radio value="period">周期</Radio>
                             从 &nbsp;
                             <InputNumber
-                                min={0}
-                                max={60}
-                                defaultValue={0}
+                                min={1}
+                                max={58}
+                                defaultValue={1}
                                 style={{ width: 80 }}
                                 placeholder="秒"
                                 size="small"
@@ -81,9 +81,9 @@ export default class Second extends PureComponent {
                             />
                             &nbsp;到&nbsp;
                             <InputNumber
-                                min={0}
-                                max={60}
-                                defaultValue={60}
+                                min={2}
+                                max={59}
+                                defaultValue={59}
                                 style={{ width: 80 }}
                                 placeholder="秒"
                                 value={end}
@@ -99,6 +99,7 @@ export default class Second extends PureComponent {
                             从第 &nbsp;
                             <InputNumber
                                 min={0}
+                                max={59}
                                 defaultValue={0}
                                 placeholder="秒"
                                 size="small"
@@ -111,7 +112,8 @@ export default class Second extends PureComponent {
                             &nbsp;秒开始， 每 &nbsp;
                             <InputNumber
                                 min={0}
-                                defaultValue={1}
+                                max={59}
+                                defaultValue={0}
                                 placeholder="秒"
                                 size="small"
                                 value={beginEvery}
