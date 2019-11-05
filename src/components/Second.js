@@ -134,6 +134,7 @@ export default class Second extends PureComponent {
                                 placeholder="秒数"
                                 size="small"
                                 value={some}
+                                showArrow
                                 onChange={value => {
                                     if (value.length < 1) {
                                         return message.warn("至少选择一项");

@@ -133,6 +133,7 @@ export default class Minute extends PureComponent {
                                 placeholder="分钟数"
                                 size="small"
                                 value={some}
+                                showArrow
                                 onChange={value => {
                                     if (value.length < 1) {
                                         return message.warn("至少选择一项");

@@ -163,6 +163,7 @@ export default class Week extends PureComponent {
                                 placeholder="星期数"
                                 size="small"
                                 value={some}
+                                showArrow
                                 onChange={value => {
                                     if (value.length < 1) {
                                         return message.warn("至少选择一项");
