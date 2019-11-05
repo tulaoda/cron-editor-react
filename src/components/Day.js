@@ -94,6 +94,7 @@ export default class Day extends PureComponent {
                                 }}
                                 disabled={type !== "period"}
                             />
+                            &nbsp;日&nbsp;
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>

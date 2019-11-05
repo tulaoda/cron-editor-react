@@ -113,7 +113,7 @@ export default class Week extends PureComponent {
                             <InputNumber
                                 min={1}
                                 max={4}
-                                defaultValue={1}
+                                defaultValue={"1"}
                                 placeholder="周"
                                 size="small"
                                 value={begin}

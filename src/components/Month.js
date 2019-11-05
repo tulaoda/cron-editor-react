@@ -79,9 +79,9 @@ export default class Month extends PureComponent {
                             />{" "}
                             到{" "}
                             <InputNumber
-                                min={1}
+                                min={2}
                                 max={12}
-                                defaultValue={12}
+                                defaultValue={2}
                                 placeholder="月"
                                 endYear={end}
                                 size="small"
@@ -90,6 +90,7 @@ export default class Month extends PureComponent {
                                 }}
                                 disabled={type !== "period"}
                             />
+                            &nbsp;月&nbsp;
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>
@@ -109,7 +110,7 @@ export default class Month extends PureComponent {
                             <InputNumber
                                 min={1}
                                 max={12}
-                                defaultValue={12}
+                                defaultValue={1}
                                 placeholder="月"
                                 endYear={beginEvery}
                                 size="small"

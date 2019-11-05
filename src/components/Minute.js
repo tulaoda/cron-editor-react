@@ -92,6 +92,7 @@ export default class Minute extends PureComponent {
                                 }}
                                 disabled={type !== "period"}
                             />
+                            &nbsp;分钟&nbsp;
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>

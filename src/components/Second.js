@@ -93,6 +93,7 @@ export default class Second extends PureComponent {
                                 }}
                                 disabled={type !== "period"}
                             />
+                            &nbsp;秒&nbsp; 
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>

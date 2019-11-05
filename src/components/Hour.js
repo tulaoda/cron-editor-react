@@ -66,7 +66,7 @@ export default class Hour extends PureComponent {
                             <Radio value="period">周期</Radio>从{" "}
                             <InputNumber
                                 min={0}
-                                max={24}
+                                max={23}
                                 defaultValue={0}
                                 style={{ width: 80 }}
                                 placeholder="时"
@@ -79,9 +79,9 @@ export default class Hour extends PureComponent {
                             />
                             到
                             <InputNumber
-                                min={0}
-                                max={24}
-                                defaultValue={24}
+                                min={2}
+                                max={23}
+                                defaultValue={2}
                                 style={{ width: 80 }}
                                 placeholder="时"
                                 value={end}
@@ -91,13 +91,14 @@ export default class Hour extends PureComponent {
                                 }}
                                 disabled={type !== "period"}
                             />
+                            &nbsp;小时&nbsp;
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>
                             从第
                             <InputNumber
                                 min={0}
-                                max={24}
+                                max={23}
                                 defaultValue={0}
                                 placeholder="时"
                                 size="small"
@@ -109,8 +110,8 @@ export default class Hour extends PureComponent {
                             />
                             时开始， 每
                             <InputNumber
-                                min={0}
-                                max={24}
+                                min={1}
+                                max={23}
                                 defaultValue={1}
                                 placeholder="小时"
                                 size="small"
