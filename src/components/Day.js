@@ -12,13 +12,27 @@ export default class Day extends PureComponent {
         this.formatDayOptions();
     }
 
+    // formatDayOptions() {
+    //     this.dayOptions = [];
+    //     for (let x = 1; x < 32; x++) {
+    //         this.dayOptions.push({
+    //             label: x,
+    //             value: `${x}`
+    //         });
+    //     }
+    // }
+
     formatDayOptions() {
         this.dayOptions = [];
-        for (let x = 1; x < 32; x++) {
-            this.dayOptions.push({
-                label: x,
-                value: `${x}`
-            });
+        for (let x = 0; x < 32; x++) {
+            const label = x < 10 ? `0${x}` : x;
+            const value = `${x}`;
+            const ele = (
+                <Select.Option value={value} key={`${label}-${x}`}>
+                    {label}
+                </Select.Option>
+            );
+            this.dayOptions.push(ele);
         }
     }
 
@@ -142,15 +156,32 @@ export default class Day extends PureComponent {
                             </Radio>
                         </List.Item>
                         <List.Item>
-                            <Radio value="some">指定</Radio>
-                            <Checkbox.Group
+                            <Radio value="some">具体天数（可多选）</Radio>
+                            <Select
+                                style={{ width: "auto" }}
+                                defaultValue={1}
+                                mode="multiple"
+                                placeholder="天数"
+                                size="small"
+                                value={some}
+                                onChange={value => {
+                                    if (value.length < 1) {
+                                        return message.warn("至少选择一项");
+                                    }
+                                    this.changeParams("some", value);
+                                }}
+                                disabled={type !== "some"}
+                            >
+                                {this.dayOptions}
+                            </Select>
+                            {/* <Checkbox.Group
                                 value={some}
                                 onChange={value => {
                                     this.changeParams("some", value);
                                 }}
                                 options={this.dayOptions}
                                 disabled={type !== "some"}
-                            />
+                            /> */}
                         </List.Item>
                     </List>
                 </Group>
