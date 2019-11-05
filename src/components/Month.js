@@ -4,21 +4,40 @@
  * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
-import { Radio, InputNumber, Row, Col, List, Checkbox } from "antd";
+import { Radio, InputNumber, Row, Col, List, Checkbox, Select } from "antd";
 const { Group } = Radio;
 export default class Month extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.formatMonthOptions();
+    }
+
     changeParams(type, value) {
         const state = { ...this.props.month };
         state[type] = value;
         this.props.onChange(state);
     }
 
-    eachMonthOptions() {
-        const options = [];
-        for (let i = 1; i < 13; i++) {
-            options.push({ label: `${i}月`, value: `${i}` });
+    // eachMonthOptions() {
+    //     const options = [];
+    //     for (let i = 1; i < 13; i++) {
+    //         options.push({ label: `${i}月`, value: `${i}` });
+    //     }
+    //     return options;
+    // }
+
+    formatMonthOptions() {
+        this.monthOptions = [];
+        for (let x = 0; x < 13; x++) {
+            const label = `${x}月`;
+            const value = `${x}`;
+            const ele = (
+                <Select.Option value={value} key={`${label}-${x}`}>
+                    {label}
+                </Select.Option>
+            );
+            this.monthOptions.push(ele);
         }
-        return options;
     }
 
     changeType = e => {
@@ -102,15 +121,32 @@ export default class Month extends PureComponent {
                             月执行一次
                         </List.Item>
                         <List.Item>
-                            <Radio value="some">指定</Radio>
-                            <Checkbox.Group
+                            <Radio value="some">具体月数（可多选）</Radio>
+                            <Select
+                                style={{ width: "auto" }}
+                                defaultValue={1}
+                                mode="multiple"
+                                placeholder="月数"
+                                size="small"
+                                value={some}
+                                onChange={value => {
+                                    if (value.length < 1) {
+                                        return message.warn("至少选择一项");
+                                    }
+                                    this.changeParams("some", value);
+                                }}
+                                disabled={type !== "some"}
+                            >
+                                {this.monthOptions}
+                            </Select>
+                            {/* <Checkbox.Group
                                 value={some}
                                 onChange={value => {
                                     this.changeParams("some", value);
                                 }}
                                 options={this.eachMonthOptions()}
                                 disabled={type !== "some"}
-                            />
+                            /> */}
                         </List.Item>
                     </List>
                 </Group>
