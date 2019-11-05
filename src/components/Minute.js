@@ -44,9 +44,9 @@ export default class Minute extends PureComponent {
 
     changeType = e => {
         const state = { ...this.props.minute };
-        if (e.target.value === "some") {
-            state.some = ["1"];
-        }
+        // if (e.target.value === "some") {
+        //     state.some = ["1"];
+        // }
         state.type = e.target.value;
         this.props.onChange(state);
     };
@@ -66,9 +66,9 @@ export default class Minute extends PureComponent {
                             <Radio value="period">周期</Radio>
                             从&nbsp;
                             <InputNumber
-                                min={0}
-                                max={60}
-                                defaultValue={0}
+                                min={1}
+                                max={58}
+                                defaultValue={1}
                                 style={{ width: 80 }}
                                 placeholder="分"
                                 size="small"
@@ -80,9 +80,9 @@ export default class Minute extends PureComponent {
                             />
                             &nbsp;到&nbsp;
                             <InputNumber
-                                min={0}
-                                max={60}
-                                defaultValue={60}
+                                min={2}
+                                max={59}
+                                defaultValue={2}
                                 style={{ width: 80 }}
                                 placeholder="分"
                                 value={end}
@@ -98,6 +98,7 @@ export default class Minute extends PureComponent {
                             从第&nbsp;
                             <InputNumber
                                 min={0}
+                                max={59}
                                 defaultValue={0}
                                 placeholder="分"
                                 size="small"
@@ -109,7 +110,8 @@ export default class Minute extends PureComponent {
                             />
                             &nbsp;分开始， 每&nbsp;
                             <InputNumber
-                                min={0}
+                                min={1}
+                                max={59}
                                 defaultValue={1}
                                 placeholder="分"
                                 size="small"
