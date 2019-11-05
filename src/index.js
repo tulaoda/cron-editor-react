@@ -50,8 +50,8 @@ class Cron extends PureComponent {
 				some: []
 			},
 			day: {
-				last: "",
-				closeWorkDay: "",
+				last: 1,
+				closeWorkDay: 1,
 				start: "",
 				end: "",
 				begin: 0,
@@ -64,21 +64,24 @@ class Cron extends PureComponent {
 				end: "",
 				begin: 0,
 				beginEvery: 1,
-				type: "*", some: []
+				type: "*",
+				some: []
 			},
 			minute: {
 				start: "",
 				end: "",
 				begin: 0,
 				beginEvery: 1,
-				type: "*", some: []
+				type: "*",
+				some: []
 			},
 			second: {
 				start: "",
 				end: "",
 				begin: 0,
 				beginEvery: 1,
-				type: "*", some: []
+				type: "*",
+				some: []
 			},
 			runTime: []
 		};

@@ -64,6 +64,7 @@ export default class Day extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("start", value);
                                 }}
+                                disabled={type !== "period"}
                             />{" "}
                             到{" "}
                             <InputNumber
@@ -77,6 +78,7 @@ export default class Day extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("end", value);
                                 }}
+                                disabled={type !== "period"}
                             />
                         </List.Item>
                         <List.Item>
@@ -91,6 +93,7 @@ export default class Day extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("begin", value);
                                 }}
+                                disabled={type !== "beginInterval"}
                             />{" "}
                             日开始， 每{" "}
                             <InputNumber
@@ -102,6 +105,7 @@ export default class Day extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("beginEvery", value);
                                 }}
+                                disabled={type !== "beginInterval"}
                             />
                             &nbsp;天执行一次
                         </List.Item>
@@ -117,6 +121,7 @@ export default class Day extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("closeWorkDay", value);
                                 }}
+                                disabled={type !== "closeWorkDay"}
                             />
                             &nbsp;日最近的那个工作日
                         </List.Item>
@@ -131,6 +136,7 @@ export default class Day extends PureComponent {
                                     onChange={value => {
                                         this.changeParams("last", value);
                                     }}
+                                    disabled={type !== "last"}
                                 />{" "}
                                 天
                             </Radio>
@@ -143,6 +149,7 @@ export default class Day extends PureComponent {
                                     this.changeParams("some", value);
                                 }}
                                 options={this.dayOptions}
+                                disabled={type !== "some"}
                             />
                         </List.Item>
                     </List>
