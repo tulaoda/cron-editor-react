@@ -28,7 +28,7 @@ export default class Month extends PureComponent {
 
     formatMonthOptions() {
         this.monthOptions = [];
-        for (let x = 0; x < 13; x++) {
+        for (let x = 1; x < 13; x++) {
             const label = `${x}月`;
             const value = `${x}`;
             const ele = (
@@ -42,9 +42,9 @@ export default class Month extends PureComponent {
 
     changeType = e => {
         const state = { ...this.props.month };
-        if (e.target.value === "some") {
-            state.some = ["1"];
-        }
+        // if (e.target.value === "some") {
+        //     state.some = ["1"];
+        // }
         state.type = e.target.value;
         this.props.onChange(state);
     };

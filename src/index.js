@@ -88,7 +88,7 @@ class Cron extends PureComponent {
 	}
 
 	initValue() {
-		const value = this.props.value ? this.props.value.toUpperCase() : "0 0 0 * * ?";
+		const value = this.props.value ? this.props.value.toUpperCase() : "0 0 0 1 1 1";
 		const valuesArray = value.split(" ");
 		let newState = { ...this.state };
 		newState.second.value = valuesArray[0] || "";
@@ -231,6 +231,7 @@ class Cron extends PureComponent {
 			minute: { ...minute },
 			second: { ...second }
 		});
+		console.log('this.state :', this.state);
 	}
 
 	format() {

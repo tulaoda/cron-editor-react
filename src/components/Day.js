@@ -24,7 +24,7 @@ export default class Day extends PureComponent {
 
     formatDayOptions() {
         this.dayOptions = [];
-        for (let x = 0; x < 32; x++) {
+        for (let x = 1; x < 32; x++) {
             const label = x < 10 ? `0${x}` : x;
             const value = `${x}`;
             const ele = (
@@ -43,7 +43,7 @@ export default class Day extends PureComponent {
     }
 
     changeType = e => {
-        const state = { ...this.props.month };
+        const state = { ...this.props.day };
         // if (e.target.value === "some") {
         //     state.some = ["1"];
         // }
@@ -159,7 +159,7 @@ export default class Day extends PureComponent {
                             <Radio value="some">具体天数（可多选）</Radio>
                             <Select
                                 style={{ width: "auto" }}
-                                defaultValue={1}
+                                defaultValue={["00"]}
                                 mode="multiple"
                                 placeholder="天数"
                                 size="small"

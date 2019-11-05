@@ -43,7 +43,7 @@ export default class Hour extends PureComponent {
     }
 
     changeType = e => {
-        const state = { ...this.props.month };
+        const state = { ...this.props.hour };
         // if (e.target.value === "some") {
         //     state.some = ["1"];
         // }
