@@ -43,6 +43,7 @@ export default class Year extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("start", value);
                                 }}
+                                disabled={type !== "period"}
                             />
                             {" - "}
                             <InputNumber
@@ -53,6 +54,7 @@ export default class Year extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("end", value);
                                 }}
+                                disabled={type !== "period"}
                             />
                         </List.Item>
                     </List>
