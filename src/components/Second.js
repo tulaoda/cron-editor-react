@@ -123,7 +123,7 @@ export default class Second extends PureComponent {
                             &nbsp;秒执行一次
                         </List.Item>
                         <List.Item>
-                            <Radio value="some">指定</Radio>
+                            <Radio value="some">具体秒数（可多选）</Radio>
                             <Select
                                 style={{ width: "auto" }}
                                 defaultValue={1}

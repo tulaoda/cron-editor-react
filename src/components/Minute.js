@@ -4,7 +4,7 @@
  * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
-import { Radio, InputNumber, message, List, Checkbox } from "antd";
+import { Radio, InputNumber, message, List, Checkbox, Select } from "antd";
 const { Group } = Radio;
 export default class Minute extends PureComponent {
     constructor(props) {
@@ -12,13 +12,27 @@ export default class Minute extends PureComponent {
         this.formatMinuteOptions();
     }
 
+    // formatMinuteOptions() {
+    //     this.minuteOptions = [];
+    //     for (let x = 0; x < 60; x++) {
+    //         this.minuteOptions.push({
+    //             label: x < 10 ? `0${x}` : x,
+    //             value: `${x}`
+    //         });
+    //     }
+    // }
+
     formatMinuteOptions() {
         this.minuteOptions = [];
         for (let x = 0; x < 60; x++) {
-            this.minuteOptions.push({
-                label: x < 10 ? `0${x}` : x,
-                value: `${x}`
-            });
+            const label = x < 10 ? `0${x}` : x;
+            const value = `${x}`;
+            const ele = (
+                <Select.Option value={value} key={`${label}-${x}`}>
+                    {label}
+                </Select.Option>
+            );
+            this.minuteOptions.push(ele);
         }
     }
 
@@ -108,8 +122,25 @@ export default class Minute extends PureComponent {
                             &nbsp;分执行一次
                         </List.Item>
                         <List.Item>
-                            <Radio value="some">指定</Radio>
-                            <Checkbox.Group
+                            <Radio value="some">具体分钟数（可多选）</Radio>
+                            <Select
+                                style={{ width: "auto" }}
+                                defaultValue={1}
+                                mode="multiple"
+                                placeholder="分钟数"
+                                size="small"
+                                value={some}
+                                onChange={value => {
+                                    if (value.length < 1) {
+                                        return message.warn("至少选择一项");
+                                    }
+                                    this.changeParams("some", value);
+                                }}
+                                disabled={type !== "some"}
+                            >
+                                {this.minuteOptions}
+                            </Select>
+                            {/* <Checkbox.Group
                                 value={some}
                                 onChange={value => {
                                     if (value.length < 1) {
@@ -119,7 +150,7 @@ export default class Minute extends PureComponent {
                                 }}
                                 options={this.minuteOptions}
                                 disabled={type !== "some"}
-                            />
+                            /> */}
                         </List.Item>
                     </List>
                 </Group>
