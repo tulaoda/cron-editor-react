@@ -12,14 +12,14 @@ import Day from "./components/Day";
 import Hour from "./components/Hour";
 import Minute from "./components/Minute";
 import Second from "./components/Second";
-import CronParse from './parse-lib/index'
-import CronParser from "cron-parser"
-import moment from 'moment'
+import CronParse from "./parse-lib/index";
+import CronParser from "cron-parser";
+import moment from "moment";
 const { TabPane } = Tabs;
-const { Panel } = Collapse
-import './css/index.less'
+const { Panel } = Collapse;
+import "./css/index.less";
 
-const dateMinute = 'YYYY-MM-DD HH:mm'
+const dateMinute = "YYYY-MM-DD HH:mm";
 
 class Cron extends PureComponent {
 	constructor(props) {
@@ -50,8 +50,8 @@ class Cron extends PureComponent {
 				some: []
 			},
 			day: {
-				last: 1,
-				closeWorkDay: 1,
+				last: "",
+				closeWorkDay: "",
 				start: "",
 				end: "",
 				begin: 0,
@@ -88,7 +88,6 @@ class Cron extends PureComponent {
 	}
 
 	initValue() {
-
 		const value = this.props.value ? this.props.value.toUpperCase() : "0 0 0 * * ?";
 		const valuesArray = value.split(" ");
 		let newState = { ...this.state };
@@ -164,7 +163,7 @@ class Cron extends PureComponent {
 			day.end = day.value.split("-")[1];
 		} else if (day.value.indexOf("W") > -1) {
 			day.type = "closeWorkDay";
-			day.closeWorkDay = day.value.split("W")[0];
+			day.closeWorkDay = day.value.split("W")[0] || 1;
 		} else if (day.value.indexOf("L") > -1) {
 			day.type = "last";
 			day.last = day.value.split("L")[0] || 1;
@@ -279,9 +278,9 @@ class Cron extends PureComponent {
 		} else if (day.type === "beginInterval") {
 			day.value = `${n2s(day.begin)}/${n2s(day.beginEvery)}`;
 		} else if (day.type === "closeWorkDay") {
-			day.value = n2s(day.closeWorkDay) + "W";
+			day.value = n2s(day.closeWorkDay || 1) + "W";
 		} else if (day.type === "last") {
-			day.value = n2s(day.last) + "L";
+			day.value = n2s(day.last || 1) + "L";
 		} else if (day.type === "some") {
 			day.value = day.some.join(",");
 		} else {
@@ -314,47 +313,53 @@ class Cron extends PureComponent {
 		} else {
 			second.value = second.type;
 		}
-		this.setState({ year: { ...year }, month: { ...month }, week: { ...week }, day: { ...day }, hour: { ...hour }, minute: { ...minute }, second: { ...second } }, () => {
-			this.triggerChange();
-		});
-
+		this.setState(
+			{
+				year: { ...year },
+				month: { ...month },
+				week: { ...week },
+				day: { ...day },
+				hour: { ...hour },
+				minute: { ...minute },
+				second: { ...second }
+			},
+			() => {
+				this.triggerChange();
+			}
+		);
 	}
 
 	n2s(number) {
-		if (typeof number === 'number' && number !== NaN) {
-			return `${number}`
+		if (typeof number === "number" && number !== NaN) {
+			return `${number}`;
 		}
-		return number
+		return number;
 	}
 
 	triggerChange() {
-		const crontab = this.format()
+		const crontab = this.format();
 		this.props.onChange && this.props.onChange(crontab);
-		const tempArr = []
+		let tempArr = [];
 
-		const weekCron = crontab.split(' ')[5]
-		if (weekCron !== '?') {
-			try {
-				const interval = CronParser.parseExpression(String(crontab).trim())
+		const weekCron = crontab.split(" ")[5];
+		try {
+			if (weekCron !== "?") {
+				const interval = CronParser.parseExpression(String(crontab).trim());
 				for (let i = 0; i < 5; i++) {
-					const temp = moment(interval.next().toString()).format(dateMinute)
-					tempArr.push(temp)
+					const temp = moment(interval.next().toString()).format(dateMinute);
+					tempArr.push(temp);
 				}
-			} catch (error) {
-				tempArr.push('暂无最新执行周期')
+			} else {
+				const cron = new CronParse();
+				tempArr = cron.expressionChange(String(crontab).trim());
 			}
+		} catch (error) {
+			tempArr.push("暂无最新执行周期");
+		}
+		if (tempArr.length > 0) {
 			this.setState({
 				runTime: tempArr
-			})
-		} else {
-			const cron = new CronParse()
-			const resList = cron.expressionChange(String(crontab).trim())
-
-			if (resList) {
-				this.setState({
-					runTime: [...resList]
-				})
-			}
+			});
 		}
 	}
 
@@ -365,110 +370,173 @@ class Cron extends PureComponent {
 		this.setState({ ...this.state }, () => {
 			this.parse();
 		});
-	}
+	};
 
 	renderOverLay() {
 		const { activeKey } = this.state;
 		return (
-			<Tabs activeKey={activeKey} onChange={(key) => { this.setState({ activeKey: key }); }}>
+			<Tabs
+				activeKey={activeKey}
+				onChange={key => {
+					this.setState({ activeKey: key });
+				}}
+			>
 				<TabPane tab="秒" key="second">
-					<Second {...this.state} onChange={(state) => {
-						this.changeState({ second: state });
-					}} />
+					<Second
+						{...this.state}
+						onChange={state => {
+							this.changeState({ second: state });
+						}}
+					/>
 				</TabPane>
 				<TabPane tab="分钟" key="minute">
-					<Minute {...this.state} onChange={(state) => {
-						this.changeState({ minute: state });
-					}} />
+					<Minute
+						{...this.state}
+						onChange={state => {
+							this.changeState({ minute: state });
+						}}
+					/>
 				</TabPane>
 				<TabPane tab="小时" key="hour">
-					<Hour {...this.state} onChange={(state) => {
-						this.changeState({ hour: state });
-					}} />
+					<Hour
+						{...this.state}
+						onChange={state => {
+							this.changeState({ hour: state });
+						}}
+					/>
 				</TabPane>
 				<TabPane tab="日" key="day">
-					<Day {...this.state} onChange={(state) => {
-						this.changeState({ day: state });
-					}} />
+					<Day
+						{...this.state}
+						onChange={state => {
+							this.changeState({ day: state });
+						}}
+					/>
 				</TabPane>
 				<TabPane tab="月" key="month">
-					<Month {...this.state} onChange={(state) => {
-						this.changeState({ month: state });
-					}} />
+					<Month
+						{...this.state}
+						onChange={state => {
+							this.changeState({ month: state });
+						}}
+					/>
 				</TabPane>
 				<TabPane tab="周" key="week">
-					<Week {...this.state} onChange={(state) => {
-						this.changeState({ week: state });
-					}} />
+					<Week
+						{...this.state}
+						onChange={state => {
+							this.changeState({ week: state });
+						}}
+					/>
 				</TabPane>
 
 				<TabPane tab="年" key="year">
-					<Year {...this.state} onChange={(state) => {
-						this.changeState({ year: state });
-					}} />
+					<Year
+						{...this.state}
+						onChange={state => {
+							this.changeState({ year: state });
+						}}
+					/>
 				</TabPane>
 			</Tabs>
-
 		);
 	}
 
 	render() {
-		const state = JSON.parse(JSON.stringify(this.state))
+		const state = JSON.parse(JSON.stringify(this.state));
 		const { year, month, week, day, hour, minute, second, runTime } = state;
-		return <div className="antd-cron">
-			{this.renderOverLay()}
-			<List bordered style={{ marginTop: 10 }}>
-				<List.Item>
-					<Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
-						<Col span={3}>秒</Col>
-						<Col span={3}>分</Col>
-						<Col span={3}>小时</Col>
-						<Col span={3}>天</Col>
-						<Col span={3}>月</Col>
-						<Col span={3}>星期</Col>
-						<Col span={3}>年</Col>
-					</Row>
-				</List.Item>
-				<List.Item>
-					<Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
-						<Col span={3}><Input value={second.value} onChange={(e) => {
-							this.onChange("second", e.target.value);
-						}} /></Col>
-						<Col span={3}><Input value={minute.value} onChange={(e) => {
-							this.onChange("minute", e.target.value);
-						}} /></Col>
-						<Col span={3}><Input value={hour.value} onChange={(e) => {
-							this.onChange("hour", e.target.value);
-						}} /></Col>
-						<Col span={3}><Input value={day.value} onChange={(e) => {
-							this.onChange("day", e.target.value);
-						}} /></Col>
-						<Col span={3}><Input value={month.value} onChange={(e) => {
-							this.onChange("month", e.target.value);
-						}} /></Col>
-						<Col span={3}><Input value={week.value} onChange={(e) => {
-							this.onChange("week", e.target.value);
-						}} /></Col>
-						<Col span={3}><Input value={year.value} onChange={(e) => {
-							this.onChange("year", e.target.value);
-						}} /></Col>
-					</Row>
-				</List.Item>
-			</List>
-			<Collapse>
-				<Panel header="近5次执行时间" key="1">
-					<List
-						bordered
-						dataSource={runTime}
-						renderItem={(item, index) => (
-							<List.Item>
-								第{index + 1}执行时间： {item}
-							</List.Item>
-						)}
-					/>
-				</Panel>
-			</Collapse>
-		</div>
+		return (
+			<div className="antd-cron">
+				{this.renderOverLay()}
+				<List bordered style={{ marginTop: 10 }}>
+					<List.Item>
+						<Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
+							<Col span={3}>秒</Col>
+							<Col span={3}>分</Col>
+							<Col span={3}>小时</Col>
+							<Col span={3}>天</Col>
+							<Col span={3}>月</Col>
+							<Col span={3}>星期</Col>
+							<Col span={3}>年</Col>
+						</Row>
+					</List.Item>
+					<List.Item>
+						<Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
+							<Col span={3}>
+								<Input
+									value={second.value}
+									onChange={e => {
+										this.onChange("second", e.target.value);
+									}}
+								/>
+							</Col>
+							<Col span={3}>
+								<Input
+									value={minute.value}
+									onChange={e => {
+										this.onChange("minute", e.target.value);
+									}}
+								/>
+							</Col>
+							<Col span={3}>
+								<Input
+									value={hour.value}
+									onChange={e => {
+										this.onChange("hour", e.target.value);
+									}}
+								/>
+							</Col>
+							<Col span={3}>
+								<Input
+									value={day.value}
+									onChange={e => {
+										this.onChange("day", e.target.value);
+									}}
+								/>
+							</Col>
+							<Col span={3}>
+								<Input
+									value={month.value}
+									onChange={e => {
+										this.onChange("month", e.target.value);
+									}}
+								/>
+							</Col>
+							<Col span={3}>
+								<Input
+									value={week.value}
+									onChange={e => {
+										this.onChange("week", e.target.value);
+									}}
+								/>
+							</Col>
+							<Col span={3}>
+								<Input
+									value={year.value}
+									onChange={e => {
+										this.onChange("year", e.target.value);
+									}}
+								/>
+							</Col>
+						</Row>
+					</List.Item>
+				</List>
+				<Collapse>
+					<Panel header="近5次执行时间" key="1">
+						<List
+							bordered
+							dataSource={runTime}
+							renderItem={(item, index) => (
+								<List.Item>
+									第{index + 1}执行时间： {item}
+								</List.Item>
+							)}
+						/>
+					</Panel>
+				</Collapse>
+			</div>
+		);
 	}
 }
-export default Cron; 
+
+export default Cron;
