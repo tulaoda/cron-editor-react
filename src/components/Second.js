@@ -4,7 +4,7 @@
  * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
-import { Radio, InputNumber, message, List, Checkbox } from "antd";
+import { Radio, InputNumber, message, List, Checkbox, Select } from "antd";
 const { Group } = Radio;
 export default class Second extends PureComponent {
     constructor(props) {
@@ -12,20 +12,34 @@ export default class Second extends PureComponent {
         this.formatSecondOptions();
     }
 
-    formatSecondOptions() {
-        this.secondOptions = [];
-        for (let x = 0; x < 60; x++) {
-            this.secondOptions.push({
-                label: x < 10 ? `0${x}` : x,
-                value: `${x}`
-            });
-        }
-    }
+    // formatSecondOptions() {
+    //     this.secondOptions = [];
+    //     for (let x = 0; x < 60; x++) {
+    //         this.secondOptions.push({
+    //             label: x < 10 ? `0${x}` : x,
+    //             value: `${x}`
+    //         });
+    //     }
+    // }
 
     changeParams(type, value) {
         const state = { ...this.props.second };
         state[type] = value;
         this.props.onChange(state);
+    }
+
+    formatSecondOptions() {
+        this.secondOptions = [];
+        for (let x = 0; x < 60; x++) {
+            const label = x < 10 ? `0${x}` : x;
+            const value = `${x}`;
+            const ele = (
+                <Select.Option value={value} key={`${label}-${x}`}>
+                    {label}
+                </Select.Option>
+            );
+            this.secondOptions.push(ele);
+        }
     }
 
     render() {
@@ -76,8 +90,8 @@ export default class Second extends PureComponent {
                                 size="small"
                                 onChange={value => {
                                     this.changeParams("end", value);
-								}}
-								disabled={type !== "period"}
+                                }}
+                                disabled={type !== "period"}
                             />
                         </List.Item>
                         <List.Item>
@@ -91,8 +105,8 @@ export default class Second extends PureComponent {
                                 value={begin}
                                 onChange={value => {
                                     this.changeParams("begin", value);
-								}}
-								disabled={type !== "beginInterval"}
+                                }}
+                                disabled={type !== "beginInterval"}
                             />{" "}
                             &nbsp;秒开始， 每 &nbsp;
                             <InputNumber
@@ -103,14 +117,19 @@ export default class Second extends PureComponent {
                                 value={beginEvery}
                                 onChange={value => {
                                     this.changeParams("beginEvery", value);
-								}}
-								disabled={type !== "beginInterval"}
+                                }}
+                                disabled={type !== "beginInterval"}
                             />{" "}
                             &nbsp;秒执行一次
                         </List.Item>
                         <List.Item>
                             <Radio value="some">指定</Radio>
-                            <Checkbox.Group
+                            <Select
+                                style={{ width: "auto" }}
+                                defaultValue={1}
+                                mode="multiple"
+                                placeholder="秒数"
+                                size="small"
                                 value={some}
                                 onChange={value => {
                                     if (value.length < 1) {
@@ -118,9 +137,21 @@ export default class Second extends PureComponent {
                                     }
                                     this.changeParams("some", value);
                                 }}
-								options={this.secondOptions}
-								disabled={type !== "some"}
-                            />
+                                disabled={type !== "some"}
+                            >
+                                {this.secondOptions}
+                            </Select>
+                            {/* <Checkbox.Group
+                                value={some}
+                                onChange={value => {
+                                    if (value.length < 1) {
+                                        return message.warn("至少选择一项");
+                                    }
+                                    this.changeParams("some", value);
+                                }}
+                                options={this.secondOptions}
+                                disabled={type !== "some"}
+                            /> */}
                         </List.Item>
                     </List>
                 </Group>
