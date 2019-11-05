@@ -4,7 +4,7 @@
  * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
-import { Radio, InputNumber, Row, Col, Select, List, Checkbox } from "antd";
+import { Radio, InputNumber, Row, Col, Select, List, Checkbox, message } from "antd";
 const { Group } = Radio;
 export default class Week extends PureComponent {
     weekOptions = [
@@ -154,8 +154,25 @@ export default class Week extends PureComponent {
                             </Select>
                         </List.Item>
                         <List.Item>
-                            <Radio value="some">指定</Radio>
-                            <Checkbox.Group
+                            <Radio value="some">具体星期数（可多选）</Radio>
+                            <Select
+                                style={{ width: "auto" }}
+                                defaultValue={1}
+                                mode="multiple"
+                                placeholder="星期数"
+                                size="small"
+                                value={some}
+                                onChange={value => {
+                                    if (value.length < 1) {
+                                        return message.warn("至少选择一项");
+                                    }
+                                    this.changeParams("some", value);
+                                }}
+                                disabled={type !== "some"}
+                            >
+                                {this.getWeekOptions()}
+                            </Select>
+                            {/* <Checkbox.Group
                                 value={some}
                                 defaultValue="1"
                                 onChange={value => {
@@ -163,7 +180,7 @@ export default class Week extends PureComponent {
                                 }}
                                 options={this.weekOptions}
                                 disabled={type !== "some"}
-                            />
+                            /> */}
                         </List.Item>
                     </List>
                 </Group>
