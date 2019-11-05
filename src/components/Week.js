@@ -89,6 +89,7 @@ export default class Week extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("start", value);
                                 }}
+                                disabled={type !== "period"}
                             >
                                 {this.getWeekOptions()}
                             </Select>{" "}
@@ -102,6 +103,7 @@ export default class Week extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("end", value);
                                 }}
+                                disabled={type !== "period"}
                             >
                                 {this.getWeekOptions()}
                             </Select>
@@ -117,6 +119,7 @@ export default class Week extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("begin", value);
                                 }}
+                                disabled={type !== "beginInterval"}
                             />{" "}
                             周的{" "}
                             <Select
@@ -128,6 +131,7 @@ export default class Week extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("beginEvery", value);
                                 }}
+                                disabled={type !== "beginInterval"}
                             >
                                 {this.getWeekOptions()}
                             </Select>
@@ -144,6 +148,7 @@ export default class Week extends PureComponent {
                                 onChange={value => {
                                     this.changeParams("last", value);
                                 }}
+                                disabled={type !== "last"}
                             >
                                 {this.getWeekOptions()}
                             </Select>
@@ -157,6 +162,7 @@ export default class Week extends PureComponent {
                                     this.changeParams("some", value);
                                 }}
                                 options={this.weekOptions}
+                                disabled={type !== "some"}
                             />
                         </List.Item>
                     </List>
