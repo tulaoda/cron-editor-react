@@ -355,7 +355,7 @@ class Cron extends PureComponent {
                 tempArr = cron.expressionChange(String(crontab).trim());
             }
         } catch (error) {
-            console.log("error :", error);
+            // console.log("error :", error);
             tempArr.push("暂无最新执行周期");
         }
         if (tempArr.length > 0) {
