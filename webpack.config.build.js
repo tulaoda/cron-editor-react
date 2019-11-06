@@ -1,5 +1,5 @@
 let webpackConfig = {
-    entry: "./src/index.js",
+    entry: "./src/index.jsx",
     output: {
         filename: "index.js",
         library: "antd-cron",
@@ -15,7 +15,7 @@ let webpackConfig = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 use: [
                     {
@@ -53,6 +53,9 @@ let webpackConfig = {
                 ]
             }
         ]
-    }
+    },
+    resolve: {
+        extensions: [".js", ".jsx"]
+    },
 };
 module.exports = webpackConfig;
