@@ -12,7 +12,14 @@
     "react",
     "js"
   ],
-  "author": "tulaoda",
+  "author": {
+    "name": "tulaoda",
+    "email": "coderaxin@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tulaoda/cron-editor-react.git"
+  },
   "license": "MIT",
   "dependencies": {
     "antd": "^3.9.3",
