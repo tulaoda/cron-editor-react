@@ -457,8 +457,8 @@ class Cron extends PureComponent {
         return (
             <div className="cron-editor-react">
                 {this.renderOverLay()}
-                <List bordered style={{ marginTop: 10 }}>
-                    <List.Item>
+                <List bordered style={{ marginTop: 10 }} >
+                    <List.Item className="cron-list-type">
                         <Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
                             <Col span={3}>秒</Col>
                             <Col span={3}>分</Col>
@@ -477,6 +477,7 @@ class Cron extends PureComponent {
                                     onChange={e => {
                                         this.onChange("second", e.target.value);
                                     }}
+                                    disabled
                                 />
                             </Col>
                             <Col span={3}>
@@ -485,6 +486,7 @@ class Cron extends PureComponent {
                                     onChange={e => {
                                         this.onChange("minute", e.target.value);
                                     }}
+                                    disabled
                                 />
                             </Col>
                             <Col span={3}>
@@ -493,6 +495,7 @@ class Cron extends PureComponent {
                                     onChange={e => {
                                         this.onChange("hour", e.target.value);
                                     }}
+                                    disabled
                                 />
                             </Col>
                             <Col span={3}>
@@ -501,6 +504,7 @@ class Cron extends PureComponent {
                                     onChange={e => {
                                         this.onChange("day", e.target.value);
                                     }}
+                                    disabled
                                 />
                             </Col>
                             <Col span={3}>
@@ -509,6 +513,7 @@ class Cron extends PureComponent {
                                     onChange={e => {
                                         this.onChange("month", e.target.value);
                                     }}
+                                    disabled
                                 />
                             </Col>
                             <Col span={3}>
@@ -517,6 +522,7 @@ class Cron extends PureComponent {
                                     onChange={e => {
                                         this.onChange("week", e.target.value);
                                     }}
+                                    disabled
                                 />
                             </Col>
                             <Col span={3}>
@@ -525,6 +531,7 @@ class Cron extends PureComponent {
                                     onChange={e => {
                                         this.onChange("year", e.target.value);
                                     }}
+                                    disabled
                                 />
                             </Col>
                         </Row>
