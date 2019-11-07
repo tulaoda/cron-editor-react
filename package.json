@@ -1,6 +1,6 @@
 {
   "name": "cron-editor-react",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "cron react parse",
   "main": "./dist/index",
   "scripts": {
@@ -23,10 +23,11 @@
   "license": "MIT",
   "dependencies": {
     "antd": "^3.9.3",
+    "cron-parser": "^2.13.0",
     "moment": "^2.19.1",
+    "prop-types": "^15.7.2",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "cron-parser": "^2.13.0"
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

@@ -2,8 +2,7 @@
 
 # cron-editor-react
 + 1.基于antd react组件的cron表达式生成工具
-+ 2.可配合antd from直接使用
-+ 3.可展示最近五次运行时间
++ 2.可展示最近五次运行时间
 
 ## Install
 
@@ -19,10 +18,13 @@ import Cron from 'cron-editor-react';
 <Cron onChange={this.onChange} />
 ```
 
-# API 
+## API
 
-+ value - 默认值 "0 0 0 1 1 1";
-+ onChange(value) - 值改变触发
+| Prop | Description | Default
+| --- | --- | -- |
+| value | cron expression  |0 0 0 * * ?  |
+| onChange | 值改变触发 | noop |
+| showRunTime（待优化） | show cron runtime | false | 
 
 ## License
 

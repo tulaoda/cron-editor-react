@@ -4,6 +4,7 @@
  * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
+import PropTypes from 'prop-types'
 import { Tabs, Dropdown, Row, Col, Input, List, Collapse } from "antd";
 import Year from "./components/Year";
 import Month from "./components/Month";
@@ -18,6 +19,8 @@ import moment from "moment";
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 import "./css/index.less";
+
+const noop = function () { }
 
 const dateMinute = "YYYY-MM-DD HH:mm";
 
@@ -88,7 +91,8 @@ class Cron extends PureComponent {
     }
 
     initValue() {
-        const value = this.props.value ? this.props.value.toUpperCase() : "0 0 0 1 1 1";
+        let { value } = this.props
+        value = value.toUpperCase()
         const valuesArray = value.split(" ");
         let newState = { ...this.state };
         newState.second.value = valuesArray[0] || "";
@@ -108,7 +112,8 @@ class Cron extends PureComponent {
     }
 
     componentDidUpdate(props) {
-        if (props.value !== this.props.value && this.props.value) {
+        const { value } = this.props
+        if (props.value !== value && value) {
             this.initValue();
         }
     }
@@ -338,10 +343,11 @@ class Cron extends PureComponent {
     }
 
     triggerChange() {
+        const { onChange, showRunTime } = this.props
         const crontab = this.format();
-        this.props.onChange && this.props.onChange(crontab);
+        onChange && onChange(crontab);
+        if (!showRunTime) return; // 既然不需要，那就不算了
         let tempArr = [];
-
         const weekCron = crontab.split(" ")[5];
         try {
             if (weekCron !== "?") {
@@ -447,6 +453,7 @@ class Cron extends PureComponent {
     render() {
         const state = JSON.parse(JSON.stringify(this.state));
         const { year, month, week, day, hour, minute, second, runTime } = state;
+        const { showRunTime } = this.props
         return (
             <div className="cron-editor-react">
                 {this.renderOverLay()}
@@ -523,22 +530,39 @@ class Cron extends PureComponent {
                         </Row>
                     </List.Item>
                 </List>
-                <Collapse>
-                    <Panel header="近5次执行时间" key="1">
-                        <List
-                            bordered
-                            dataSource={runTime}
-                            renderItem={(item, index) => (
-                                <List.Item>
-                                    第{index + 1}执行时间： {item}
-                                </List.Item>
-                            )}
-                        />
-                    </Panel>
-                </Collapse>
+                {
+                    showRunTime
+                    && (
+                        <Collapse>
+                            <Panel header="近5次执行时间" key="1">
+                                <List
+                                    bordered
+                                    dataSource={runTime}
+                                    renderItem={(item, index) => (
+                                        <List.Item>
+                                            第{index + 1}执行时间： {item}
+                                        </List.Item>
+                                    )}
+                                />
+                            </Panel>
+                        </Collapse>
+                    )
+                }
             </div>
         );
     }
+}
+
+Cron.propTypes = {
+    onChange: PropTypes.func,
+    showRunTime: PropTypes.bool,
+    value: PropTypes.string
+}
+
+Cron.defaultProps = {
+    onChange: noop,
+    showRunTime: false,
+    value: '0 0 0 * * ?'
 }
 
 export default Cron;
