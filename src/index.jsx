@@ -41,7 +41,7 @@ class Cron extends PureComponent {
                 begin: 1,
                 beginEvery: 1,
                 type: "*",
-                some: []
+                some: ['1']
             },
             week: {
                 start: "1",
@@ -60,7 +60,7 @@ class Cron extends PureComponent {
                 begin: 1,
                 beginEvery: 1,
                 type: "*",
-                some: []
+                some: ['1']
             },
             hour: {
                 start: 0,
@@ -345,6 +345,7 @@ class Cron extends PureComponent {
     triggerChange() {
         const { onChange, showRunTime } = this.props
         const crontab = this.format();
+        console.log('crontab', crontab)
         onChange && onChange(crontab);
         if (!showRunTime) return; // 既然不需要，那就不算了
         let tempArr = [];
