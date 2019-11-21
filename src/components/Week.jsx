@@ -92,7 +92,7 @@ export default class Week extends PureComponent {
                             <Radio value="period">周期</Radio>从{" "}
                             <Select
                                 style={{ width: 80 }}
-                                defaultValue={"1"}
+                                defaultValue={1}
                                 placeholder="周"
                                 size="small"
                                 value={start}
@@ -106,7 +106,7 @@ export default class Week extends PureComponent {
                             到{" "}
                             <Select
                                 style={{ width: 80 }}
-                                defaultValue={"2"}
+                                defaultValue={2}
                                 placeholder="周"
                                 value={end}
                                 size="small"

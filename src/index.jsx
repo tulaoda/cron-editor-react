@@ -382,7 +382,7 @@ class Cron extends PureComponent {
     };
 
     renderOverLay() {
-        const { activeKey } = this.state;
+        const { activeKey, week, day } = this.state;
         return (
             <Tabs
                 activeKey={activeKey}
@@ -418,6 +418,13 @@ class Cron extends PureComponent {
                     <Day
                         {...this.state}
                         onChange={state => {
+                            if (week.type === '?') {
+                                const obj = { ...week, type: "*" }
+                                console.log('obj', obj)
+                                this.setState({
+                                    week: obj
+                                })
+                            }
                             this.changeState({ day: state });
                         }}
                     />
@@ -434,6 +441,12 @@ class Cron extends PureComponent {
                     <Week
                         {...this.state}
                         onChange={state => {
+                            if (day.type === '?') {
+                                const obj = { ...day, type: "*" }
+                                this.setState({
+                                    day: obj
+                                })
+                            }
                             this.changeState({ week: state });
                         }}
                     />
