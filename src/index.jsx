@@ -71,8 +71,8 @@ class Cron extends PureComponent {
                 some: []
             },
             minute: {
-                start: 1,
-                end: 2,
+                start: 0,
+                end: 1,
                 begin: 0,
                 beginEvery: 1,
                 type: "*",

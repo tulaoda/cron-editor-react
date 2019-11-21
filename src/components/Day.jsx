@@ -39,11 +39,15 @@ export default class Day extends PureComponent {
     changeParams(type, value) {
         const state = { ...this.props.day };
         state[type] = value;
-        if(type==='start'){
-            state["end"] = value + 1;
+        if (type === 'start') {
+            if (state.end - state.start <= 1) {
+                state.end = value + 1;
+            }
         }
-        if(type==='end'){
-            state["start"] = value - 1;
+        if (type === 'end') {
+            if (state.end - state.start <= 1) {
+                state.start = value - 1;
+            }
         }
         this.props.onChange(state);
     }
@@ -158,7 +162,7 @@ export default class Day extends PureComponent {
                                         this.changeParams("last", value);
                                     }}
                                     disabled
-                                    // disabled={type !== "last"}
+                                // disabled={type !== "last"}
                                 />{" "}
                                 天
                             </Radio>

@@ -10,6 +10,16 @@ export default class Year extends PureComponent {
     changeParams(type, value) {
         const state = { ...this.props.year };
         state[type] = value;
+        if (type === 'start') {
+            if (state.end - state.start <= 1) {
+                state.end = value + 1;
+            }
+        }
+        if (type === 'end') {
+            if (state.end - state.start <= 1) {
+                state.start = value - 1;
+            }
+        }
         this.props.onChange(state);
     }
 
@@ -36,7 +46,7 @@ export default class Year extends PureComponent {
                         <List.Item>
                             <Radio value="period">周期</Radio>
                             <InputNumber
-                                min={0}
+                                min={new Date().getFullYear()}
                                 defaultValue={2018}
                                 value={start}
                                 placeholder="年"
@@ -47,9 +57,9 @@ export default class Year extends PureComponent {
                             />
                             {" - "}
                             <InputNumber
-                                min={0}
+                                min={new Date().getFullYear() + 1}
                                 defaultValue={2019}
-                                endYear={end}
+                                value={end}
                                 placeholder="年"
                                 onChange={value => {
                                     this.changeParams("end", value);

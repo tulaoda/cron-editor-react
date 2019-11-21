@@ -39,6 +39,16 @@ export default class Minute extends PureComponent {
     changeParams(type, value) {
         const state = { ...this.props.minute };
         state[type] = value;
+        if (type === 'start') {
+            if (state.end - state.start <= 1) {
+                state.end = value + 1;
+            }
+        }
+        if (type === 'end') {
+            if (state.end - state.start <= 1) {
+                state.start = value - 1;
+            }
+        }
         this.props.onChange(state);
     }
 
@@ -66,9 +76,9 @@ export default class Minute extends PureComponent {
                             <Radio value="period">周期</Radio>
                             从&nbsp;
                             <InputNumber
-                                min={1}
+                                min={0}
                                 max={58}
-                                defaultValue={1}
+                                defaultValue={0}
                                 style={{ width: 80 }}
                                 placeholder="分"
                                 size="small"
@@ -80,9 +90,9 @@ export default class Minute extends PureComponent {
                             />
                             &nbsp;到&nbsp;
                             <InputNumber
-                                min={2}
+                                min={1}
                                 max={59}
-                                defaultValue={2}
+                                defaultValue={1}
                                 style={{ width: 80 }}
                                 placeholder="分"
                                 value={end}

@@ -39,11 +39,15 @@ export default class Hour extends PureComponent {
     changeParams(type, value) {
         const state = { ...this.props.hour };
         state[type] = value;
-        if(type==='start'){
-            state["end"] = value + 1;
+        if (type === 'start') {
+            if (state.end - state.start <= 1) {
+                state.end = value + 1;
+            }
         }
-        if(type==='end'){
-            state["start"] = value - 1;
+        if (type === 'end') {
+            if (state.end - state.start <= 1) {
+                state.start = value - 1;
+            }
         }
         this.props.onChange(state);
     }
