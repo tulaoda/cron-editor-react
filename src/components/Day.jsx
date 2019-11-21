@@ -39,6 +39,9 @@ export default class Day extends PureComponent {
     changeParams(type, value) {
         const state = { ...this.props.day };
         state[type] = value;
+        if(type==='start'){
+            state["end"] = value+1;
+        }
         this.props.onChange(state);
     }
 
@@ -69,7 +72,7 @@ export default class Day extends PureComponent {
                             <Radio value="period">周期</Radio>从{" "}
                             <InputNumber
                                 min={1}
-                                max={31}
+                                max={30}
                                 defaultValue={1}
                                 style={{ width: 80 }}
                                 placeholder="日"
@@ -82,7 +85,7 @@ export default class Day extends PureComponent {
                             />{" "}
                             到{" "}
                             <InputNumber
-                                min={1}
+                                min={2}
                                 max={31}
                                 defaultValue={2}
                                 style={{ width: 80 }}
@@ -98,7 +101,7 @@ export default class Day extends PureComponent {
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>
-                            从第{" "}
+                            {" "}
                             <InputNumber
                                 min={1}
                                 defaultValue={1}
@@ -151,7 +154,8 @@ export default class Day extends PureComponent {
                                     onChange={value => {
                                         this.changeParams("last", value);
                                     }}
-                                    disabled={type !== "last"}
+                                    disabled
+                                    // disabled={type !== "last"}
                                 />{" "}
                                 天
                             </Radio>
