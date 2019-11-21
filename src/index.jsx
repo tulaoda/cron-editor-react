@@ -50,7 +50,7 @@ class Cron extends PureComponent {
                 begin: "1",
                 beginEvery: "1",
                 type: "?",
-                some: []
+                some: ['1']
             },
             day: {
                 last: 1,
