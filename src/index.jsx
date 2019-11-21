@@ -44,13 +44,13 @@ class Cron extends PureComponent {
                 some: ['1']
             },
             week: {
-                start: "1",
-                end: "2",
-                last: "1",
-                begin: "1",
-                beginEvery: "1",
+                start: 1,
+                end: 2,
+                last: 1,
+                begin: 1,
+                beginEvery: 1,
                 type: "?",
-                some: ['1']
+                some: [1]
             },
             day: {
                 last: 1,
@@ -80,7 +80,7 @@ class Cron extends PureComponent {
             },
             second: {
                 start: 0,
-                end: 2,
+                end: 1,
                 begin: 0,
                 beginEvery: 1,
                 type: "*",

@@ -10,31 +10,31 @@ export default class Week extends PureComponent {
     weekOptions = [
         {
             label: "星期一",
-            value: "1"
+            value: 1
         },
         {
             label: "星期二",
-            value: "2"
+            value: 2
         },
         {
             label: "星期三",
-            value: "3"
+            value: 3
         },
         {
             label: "星期四",
-            value: "4"
+            value: 4
         },
         {
             label: "星期五",
-            value: "5"
+            value: 5
         },
         {
             label: "星期六",
-            value: "6"
+            value: 6
         },
         {
             label: "星期日",
-            value: "7"
+            value: 7
         }
     ];
 
@@ -51,6 +51,12 @@ export default class Week extends PureComponent {
     changeParams(type, value) {
         const state = { ...this.props.week };
         state[type] = value;
+        if(type==='start'){
+            state["end"] = value + 1;
+        }
+        if(type==='end'){
+            state["start"] = value - 1;
+        }
         this.props.onChange(state);
     }
 
@@ -91,7 +97,7 @@ export default class Week extends PureComponent {
                                 }}
                                 disabled={type !== "period"}
                             >
-                                {this.getWeekOptions()}
+                                {this.getWeekOptions().slice(0, 6)}
                             </Select>{" "}
                             到{" "}
                             <Select

@@ -15,6 +15,12 @@ export default class Month extends PureComponent {
     changeParams(type, value) {
         const state = { ...this.props.month };
         state[type] = value;
+        if(type==='start'){
+            state["end"] = value + 1;
+        }
+        if(type==='end'){
+            state["start"] = value - 1;
+        }
         this.props.onChange(state);
     }
 
@@ -60,14 +66,14 @@ export default class Month extends PureComponent {
                         <List.Item>
                             <Radio value="*">每月</Radio>
                         </List.Item>
-                        <List.Item>
+                        {/* <List.Item>
                             <Radio value="?">不指定</Radio>
-                        </List.Item>
+                        </List.Item> */}
                         <List.Item style={{ marginBottom: 5 }}>
                             <Radio value="period">周期</Radio>从{" "}
                             <InputNumber
                                 min={1}
-                                max={12}
+                                max={11}
                                 defaultValue={1}
                                 placeholder="月"
                                 size="small"
@@ -83,7 +89,7 @@ export default class Month extends PureComponent {
                                 max={12}
                                 defaultValue={2}
                                 placeholder="月"
-                                endYear={end}
+                                value={end}
                                 size="small"
                                 onChange={value => {
                                     this.changeParams("end", value);
