@@ -418,8 +418,14 @@ class Cron extends PureComponent {
                     <Day
                         {...this.state}
                         onChange={state => {
-                            if (week.type === '?') {
+                            if (week.type === '?' && state.type === '?') {
                                 const obj = { ...week, type: "*" }
+                                console.log('obj', obj)
+                                this.setState({
+                                    week: obj
+                                })
+                            } else {
+                                const obj = { ...week, type: "?" }
                                 console.log('obj', obj)
                                 this.setState({
                                     week: obj
@@ -441,12 +447,20 @@ class Cron extends PureComponent {
                     <Week
                         {...this.state}
                         onChange={state => {
-                            if (day.type === '?') {
-                                const obj = { ...day, type: "*" }
+                            if (day.type === '?' && state.type === '?') {
+                                const obj = { ...week, type: "*" }
+                                console.log('obj', obj)
+                                this.setState({
+                                    day: obj
+                                })
+                            } else {
+                                const obj = { ...week, type: "?" }
+                                console.log('obj', obj)
                                 this.setState({
                                     day: obj
                                 })
                             }
+
                             this.changeState({ week: state });
                         }}
                     />
