@@ -383,12 +383,14 @@ class Cron extends PureComponent {
 
     renderOverLay() {
         const { activeKey, week, day } = this.state;
+        const { tabType } = this.props
         return (
             <Tabs
                 activeKey={activeKey}
                 onChange={key => {
                     this.setState({ activeKey: key });
                 }}
+                type={tabType}
             >
                 <TabPane tab="秒" key="second">
                     <Second
@@ -481,90 +483,95 @@ class Cron extends PureComponent {
     render() {
         const state = JSON.parse(JSON.stringify(this.state));
         const { year, month, week, day, hour, minute, second, runTime } = state;
-        const { showRunTime } = this.props
+        const { showRunTime, showCrontab } = this.props
         return (
             <div className="cron-editor-react">
                 {this.renderOverLay()}
-                <List bordered style={{ marginTop: 10 }} >
-                    <List.Item className="cron-list-type">
-                        <Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
-                            <Col span={3}>秒</Col>
-                            <Col span={3}>分</Col>
-                            <Col span={3}>小时</Col>
-                            <Col span={3}>天</Col>
-                            <Col span={3}>月</Col>
-                            <Col span={3}>星期</Col>
-                            <Col span={3}>年</Col>
-                        </Row>
-                    </List.Item>
-                    <List.Item>
-                        <Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
-                            <Col span={3}>
-                                <Input
-                                    value={second.value}
-                                    onChange={e => {
-                                        this.onChange("second", e.target.value);
-                                    }}
-                                    disabled
-                                />
-                            </Col>
-                            <Col span={3}>
-                                <Input
-                                    value={minute.value}
-                                    onChange={e => {
-                                        this.onChange("minute", e.target.value);
-                                    }}
-                                    disabled
-                                />
-                            </Col>
-                            <Col span={3}>
-                                <Input
-                                    value={hour.value}
-                                    onChange={e => {
-                                        this.onChange("hour", e.target.value);
-                                    }}
-                                    disabled
-                                />
-                            </Col>
-                            <Col span={3}>
-                                <Input
-                                    value={day.value}
-                                    onChange={e => {
-                                        this.onChange("day", e.target.value);
-                                    }}
-                                    disabled
-                                />
-                            </Col>
-                            <Col span={3}>
-                                <Input
-                                    value={month.value}
-                                    onChange={e => {
-                                        this.onChange("month", e.target.value);
-                                    }}
-                                    disabled
-                                />
-                            </Col>
-                            <Col span={3}>
-                                <Input
-                                    value={week.value}
-                                    onChange={e => {
-                                        this.onChange("week", e.target.value);
-                                    }}
-                                    disabled
-                                />
-                            </Col>
-                            <Col span={3}>
-                                <Input
-                                    value={year.value}
-                                    onChange={e => {
-                                        this.onChange("year", e.target.value);
-                                    }}
-                                    disabled
-                                />
-                            </Col>
-                        </Row>
-                    </List.Item>
-                </List>
+                {
+                    showCrontab && (
+                        <List bordered style={{ marginTop: 10 }} >
+                            <List.Item className="cron-list-type">
+                                <Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
+                                    <Col span={3}>秒</Col>
+                                    <Col span={3}>分</Col>
+                                    <Col span={3}>小时</Col>
+                                    <Col span={3}>天</Col>
+                                    <Col span={3}>月</Col>
+                                    <Col span={3}>星期</Col>
+                                    <Col span={3}>年</Col>
+                                </Row>
+                            </List.Item>
+                            <List.Item>
+                                <Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
+                                    <Col span={3}>
+                                        <Input
+                                            value={second.value}
+                                            onChange={e => {
+                                                this.onChange("second", e.target.value);
+                                            }}
+                                            disabled
+                                        />
+                                    </Col>
+                                    <Col span={3}>
+                                        <Input
+                                            value={minute.value}
+                                            onChange={e => {
+                                                this.onChange("minute", e.target.value);
+                                            }}
+                                            disabled
+                                        />
+                                    </Col>
+                                    <Col span={3}>
+                                        <Input
+                                            value={hour.value}
+                                            onChange={e => {
+                                                this.onChange("hour", e.target.value);
+                                            }}
+                                            disabled
+                                        />
+                                    </Col>
+                                    <Col span={3}>
+                                        <Input
+                                            value={day.value}
+                                            onChange={e => {
+                                                this.onChange("day", e.target.value);
+                                            }}
+                                            disabled
+                                        />
+                                    </Col>
+                                    <Col span={3}>
+                                        <Input
+                                            value={month.value}
+                                            onChange={e => {
+                                                this.onChange("month", e.target.value);
+                                            }}
+                                            disabled
+                                        />
+                                    </Col>
+                                    <Col span={3}>
+                                        <Input
+                                            value={week.value}
+                                            onChange={e => {
+                                                this.onChange("week", e.target.value);
+                                            }}
+                                            disabled
+                                        />
+                                    </Col>
+                                    <Col span={3}>
+                                        <Input
+                                            value={year.value}
+                                            onChange={e => {
+                                                this.onChange("year", e.target.value);
+                                            }}
+                                            disabled
+                                        />
+                                    </Col>
+                                </Row>
+                            </List.Item>
+                        </List>
+                    )
+                }
+
                 {
                     showRunTime
                     && (
@@ -591,13 +598,17 @@ class Cron extends PureComponent {
 Cron.propTypes = {
     onChange: PropTypes.func,
     showRunTime: PropTypes.bool,
-    value: PropTypes.string
+    value: PropTypes.string,
+    tabType: PropTypes.string,
+    showCrontab: PropTypes.bool
 }
 
 Cron.defaultProps = {
     onChange: noop,
     showRunTime: false,
-    value: '0 0 0 * * ?'
+    value: '0 0 0 * * ?',
+    tabType: 'line',
+    showCrontab: true
 }
 
 export default Cron;
