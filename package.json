@@ -1,6 +1,6 @@
 {
   "name": "cron-editor-react",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "cron react parse",
   "main": "./dist/index",
   "scripts": {
