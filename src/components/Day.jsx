@@ -108,7 +108,7 @@ export default class Day extends PureComponent {
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>
-                            {" "}
+                            从{" "}
                             <InputNumber
                                 min={1}
                                 defaultValue={1}

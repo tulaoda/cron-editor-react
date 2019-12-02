@@ -105,7 +105,7 @@ export default class Hour extends PureComponent {
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>
-                            从第
+                            从
                             <InputNumber
                                 min={0}
                                 max={23}

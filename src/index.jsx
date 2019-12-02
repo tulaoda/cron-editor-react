@@ -68,7 +68,7 @@ class Cron extends PureComponent {
                 begin: 0,
                 beginEvery: 1,
                 type: "*",
-                some: []
+                some: ['0']
             },
             minute: {
                 start: 0,
@@ -76,7 +76,7 @@ class Cron extends PureComponent {
                 begin: 0,
                 beginEvery: 1,
                 type: "*",
-                some: []
+                some: ['0']
             },
             second: {
                 start: 0,
@@ -84,7 +84,7 @@ class Cron extends PureComponent {
                 begin: 0,
                 beginEvery: 1,
                 type: "*",
-                some: []
+                some: ['0']
             },
             runTime: []
         };
@@ -286,7 +286,8 @@ class Cron extends PureComponent {
         } else if (day.type === "closeWorkDay") {
             day.value = n2s(day.closeWorkDay || 1) + "W";
         } else if (day.type === "last") {
-            day.value = n2s(day.last || 1) + "L";
+            // day.value = n2s(day.last || 1) + "L";
+            day.value = "L";
         } else if (day.type === "some") {
             day.value = day.some.join(",");
         } else {

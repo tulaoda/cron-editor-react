@@ -104,6 +104,7 @@ export default class Month extends PureComponent {
                         </List.Item>
                         <List.Item>
                             <Radio value="beginInterval"></Radio>
+                            从
                             <InputNumber
                                 min={1}
                                 max={12}
@@ -116,7 +117,7 @@ export default class Month extends PureComponent {
                                 }}
                                 disabled={type !== "beginInterval"}
                             />{" "}
-                            日开始， 每{" "}
+                            月开始， 每{" "}
                             <InputNumber
                                 min={1}
                                 max={12}
