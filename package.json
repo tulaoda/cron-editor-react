@@ -1,7 +1,7 @@
 {
-  "name": "cron-editor-react",
-  "version": "3.0.1",
-  "description": "cron react parse",
+  "name": "crontab-editor-fe-ml",
+  "version": "4.0.2",
+  "description": "基于antd、react的crontab表达式生成工具",
   "main": "./dist/index",
   "scripts": {
     "start": "webpack-dev-server",
@@ -13,7 +13,7 @@
     "js"
   ],
   "author": {
-    "name": "tulaoda",
+    "name": "宋鑫鑫",
     "email": "coderaxin@163.com"
   },
   "repository": {

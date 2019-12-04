@@ -1,19 +1,19 @@
 ![](./screenshot.png)
 
-# cron-editor-react
+# crontab-editor-fe-ml
 + 1.基于antd react组件的cron表达式生成工具
 + 2.可展示最近五次运行时间
 
 ## Install
 
 ```shell
-npm i cron-editor-react --save
+npm i crontab-editor-fe-ml --save
 ```
 
 ## Usage
 
 ```javascript
-import Cron from 'cron-editor-react';
+import Cron from 'crontab-editor-fe-ml';
 
 <Cron onChange={this.onChange} />
 ```
