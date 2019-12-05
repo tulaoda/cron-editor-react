@@ -1,6 +1,6 @@
 {
   "name": "crontab-editor-fe-ml",
-  "version": "4.0.2",
+  "version": "4.0.4",
   "description": "基于antd、react的crontab表达式生成工具",
   "main": "./dist/index",
   "scripts": {
