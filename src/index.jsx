@@ -607,7 +607,7 @@ Cron.propTypes = {
 Cron.defaultProps = {
     onChange: noop,
     showRunTime: false,
-    value: '0 0 0 * * ?',
+    value: '* * * * * ?',
     tabType: 'line',
     showCrontab: true
 }
