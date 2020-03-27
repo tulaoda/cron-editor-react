@@ -1,6 +1,6 @@
 {
   "name": "cron-mlamp-editor",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "description": "基于antd、react的crontab表达式生成工具",
   "main": "./dist/index",
   "scripts": {

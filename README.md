@@ -29,13 +29,12 @@
 | Day of week  | 是       | 0–6 or SUN–SAT  | *,-?L#       | ?L#只有部分软件实现了  |
 | Year         | 否       | 1970–2099       | *,-          | 标准实现不支持此字段。 |
 
->为了降低使用人员学习成本，cron表达式生成器应用而生，在线Cron表达式生成器：http://cron.qqe2.com/。
+>为了降低使用人员学习成本，Cron表达式生成器应用而生，在线Cron表达式生成器：http://cron.qqe2.com/。
 
-# cron-mlamp-editor 组件
-
+# cron-mlamp-editor - 基于 antd、react的Cron表达式生成器
 ![](./screenshot.png)
 ## 特性
-+ 1.基于antd react构建
++ 1.基于antd，UI友好
 + 2.可本地计算并展示最近五次运行时间（未全面测试api，谨慎使用，通常由后端计算返回，也更合理，可作为备选方案。）
 
 ## 安装
