@@ -9,6 +9,10 @@ const { Group } = Radio;
 export default class Week extends PureComponent {
     weekOptions = [
         {
+            label: "星期日",
+            value: 1
+        },
+        {
             label: "星期一",
             value: 2
         },
@@ -31,10 +35,6 @@ export default class Week extends PureComponent {
         {
             label: "星期六",
             value: 7
-        },
-        {
-            label: "星期日",
-            value: 1
         }
     ];
 
