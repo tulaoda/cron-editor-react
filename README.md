@@ -1,18 +1,17 @@
-## cron-mlamp-editor
+## cron-editor-react
 cron表达式生成工具
 ![](./screenshot.png)
 
 ## Installation
 
 ```shell
-npm set registry http://npm.po.mlamp.cn
-npm i cron-mlamp-editor --save
+npm i cron-editor-react --save
 ```
 
 ## Usage
 
 ```javascript
-import CronEditor from 'cron-mlamp-editor';
+import CronEditor from 'cron-editor-react';
 
 const handleCronChange = (cronExpression) => {
   console.log(cronExpression) //0 0 0 * * ?

@@ -1,5 +1,5 @@
 {
-  "name": "cron-mlamp-editor",
+  "name": "cron-editor-react",
   "version": "1.0.1",
   "description": "基于antd、react的crontab表达式生成工具",
   "main": "./dist/index",
@@ -13,12 +13,12 @@
     "js"
   ],
   "author": {
-    "name": "前端魔法部",
-    "email": "songxinxin@mininglamp.com"
+    "name": "tulaoda",
+    "email": "coderaxin@163.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://code.mlamp.cn/frontend/public/cron-mlamp-editor.git"
+    "url": "https://github.com/tulaoda/cron-editor-react.git"
   },
   "license": "MIT",
   "dependencies": {
