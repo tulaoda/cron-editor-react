@@ -1,7 +1,7 @@
 {
   "name": "cron-editor-react",
-  "version": "3.0.3",
-  "description": "cron react parse",
+  "version": "5.0.0",
+  "description": "基于antd、react的crontab表达式生成工具",
   "main": "./dist/index",
   "scripts": {
     "start": "webpack-dev-server",
