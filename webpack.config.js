@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 let webpackConfig = {
-    entry: "./test.js",
+    entry: "./index.js",
     output: {
         filename: "index.js",
         publicPath: "/"
@@ -8,10 +8,10 @@ let webpackConfig = {
     mode: "development",
     devtool: "cheap-module-eval-source-map",
     devServer: {
-        port: 7979,
+        port: 3000,
         open: true,
         host: "0.0.0.0",
-        openPage: "./test.html",
+        openPage: "/dist/index.html",
         hot: true,
         publicPath: "/"
     },

@@ -1,11 +1,12 @@
 {
   "name": "cron-editor-react",
-  "version": "5.0.0",
+  "version": "1.0.0",
   "description": "基于antd、react的crontab表达式生成工具",
   "main": "./dist/index",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack -p --config ./webpack.config.build.js"
+    "build": "webpack -p --config ./webpack.config.build.js",
+    "deploy": "node ./build/copy-to-test.js"
   },
   "keywords": [
     "cron",
@@ -18,11 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tulaoda/cron-editor-react.git"
+    "url": "git@github.com:tulaoda/cron-editor-react.git"
   },
   "license": "MIT",
   "dependencies": {
     "antd": "^3.9.3",
+    "classnames": "^2.2.6",
     "cron-parser": "^2.13.0",
     "moment": "^2.19.1",
     "prop-types": "^15.7.2",

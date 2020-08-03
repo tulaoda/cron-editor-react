@@ -47,22 +47,24 @@ export default class Year extends PureComponent {
                             <Radio value="period">周期</Radio>
                             <InputNumber
                                 min={new Date().getFullYear()}
-                                defaultValue={2018}
                                 value={start}
                                 placeholder="年"
                                 onChange={value => {
-                                    this.changeParams("start", value);
+                                    if (value && Number(value) >= 0) {
+                                        this.changeParams("start", value);
+                                    }
                                 }}
                                 disabled={type !== "period"}
                             />
                             {" - "}
                             <InputNumber
                                 min={new Date().getFullYear() + 1}
-                                defaultValue={2019}
                                 value={end}
                                 placeholder="年"
                                 onChange={value => {
-                                    this.changeParams("end", value);
+                                    if (value && Number(value) >= 0) {
+                                        this.changeParams("end", value);
+                                    }
                                 }}
                                 disabled={type !== "period"}
                             />

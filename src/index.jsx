@@ -4,6 +4,7 @@
  * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
+import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Tabs, Dropdown, Row, Col, Input, List, Collapse } from "antd";
 import Year from "./components/Year";
@@ -33,7 +34,7 @@ class Cron extends PureComponent {
             year: {
                 type: "",
                 start: date.getFullYear(),
-                end: date.getFullYear()
+                end: date.getFullYear() + 1
             },
             month: {
                 start: 1,
@@ -44,13 +45,13 @@ class Cron extends PureComponent {
                 some: ['1']
             },
             week: {
-                start: 1,
-                end: 2,
-                last: 1,
+                start: "1",
+                end: "2",
+                last: "1",
                 begin: 1,
-                beginEvery: 1,
+                beginEvery: "1",
                 type: "?",
-                some: [1]
+                some: ["1"]
             },
             day: {
                 last: 1,
@@ -122,24 +123,22 @@ class Cron extends PureComponent {
         let { year, month, week, day, hour, minute, second } = this.state;
         if (year.value.indexOf("-") > -1) {
             year.type = "period";
-            const period = year.value.split("-")[0];
-            year.start = period[0];
-            year.end = period[1];
+            year.start = year.value.split("-")[0];
+            year.end = year.value.split("-")[1];
         } else {
             year.type = year.value;
         }
         if (week.value.indexOf("-") > -1) {
             week.type = "period";
-            const period = week.value.split("-")[0];
-            week.start = period[0];
-            week.end = period[1];
+            week.start = week.value.split("-")[0];
+            week.end = week.value.split("-")[1];
         } else if (week.value.indexOf("L") > -1) {
             week.type = "last";
             week.last = week.value.split("L")[0] || 1;
         } else if (week.value.indexOf("#") > -1) {
             week.type = "beginInterval";
-            week.begin = week.value.split("#")[0];
-            week.beginEvery = week.value.split("#")[1];
+            week.begin = week.value.split("#")[1];
+            week.beginEvery = week.value.split("#")[0];
         } else if (week.value.indexOf(",") > -1 || /^[0-9]+$/.test(week.value)) {
             week.type = "some";
             week.some = week.value.split(",");
@@ -271,7 +270,7 @@ class Cron extends PureComponent {
         if (week.type === "period") {
             week.value = `${n2s(week.start)}-${n2s(week.end)}`;
         } else if (week.type === "beginInterval") {
-            week.value = `${n2s(week.begin)}#${n2s(week.beginEvery)}`;
+            week.value = `${n2s(week.beginEvery)}#${n2s(week.begin)}`;
         } else if (week.type === "last") {
             week.value = n2s(week.last) + "L";
         } else if (week.type === "some") {
@@ -483,10 +482,10 @@ class Cron extends PureComponent {
 
     render() {
         const state = JSON.parse(JSON.stringify(this.state));
-        const { year, month, week, day, hour, minute, second, runTime } = state;
+        const { year, month, week, day, hour, minute, second, runTime, activeKey } = state;
         const { showRunTime, showCrontab } = this.props
         return (
-            <div className="cron-editor-react">
+            <div className="cron-editor-mlamp-react">
                 {this.renderOverLay()}
                 {
                     showCrontab && (
@@ -506,6 +505,9 @@ class Cron extends PureComponent {
                                 <Row type="flex" gutter={5} style={{ width: "100%", textAlign: "center" }}>
                                     <Col span={3}>
                                         <Input
+                                            className={
+                                                classNames({ 'highlight': activeKey === 'second' })
+                                            }
                                             value={second.value}
                                             onChange={e => {
                                                 this.onChange("second", e.target.value);
@@ -519,20 +521,30 @@ class Cron extends PureComponent {
                                             onChange={e => {
                                                 this.onChange("minute", e.target.value);
                                             }}
+                                            className={
+                                                classNames({ 'highlight': activeKey === 'minute' })
+                                            }
                                             disabled
                                         />
                                     </Col>
                                     <Col span={3}>
                                         <Input
+                                            className={
+                                                classNames({ 'highlight': activeKey === 'hour' })
+                                            }
                                             value={hour.value}
                                             onChange={e => {
                                                 this.onChange("hour", e.target.value);
                                             }}
+
                                             disabled
                                         />
                                     </Col>
                                     <Col span={3}>
                                         <Input
+                                            className={
+                                                classNames({ 'highlight': activeKey === 'day' })
+                                            }
                                             value={day.value}
                                             onChange={e => {
                                                 this.onChange("day", e.target.value);
@@ -542,6 +554,9 @@ class Cron extends PureComponent {
                                     </Col>
                                     <Col span={3}>
                                         <Input
+                                            className={
+                                                classNames({ 'highlight': activeKey === 'month' })
+                                            }
                                             value={month.value}
                                             onChange={e => {
                                                 this.onChange("month", e.target.value);
@@ -551,6 +566,9 @@ class Cron extends PureComponent {
                                     </Col>
                                     <Col span={3}>
                                         <Input
+                                            className={
+                                                classNames({ 'highlight': activeKey === 'week' })
+                                            }
                                             value={week.value}
                                             onChange={e => {
                                                 this.onChange("week", e.target.value);
@@ -560,6 +578,9 @@ class Cron extends PureComponent {
                                     </Col>
                                     <Col span={3}>
                                         <Input
+                                            className={
+                                                classNames({ 'highlight': activeKey === 'year' })
+                                            }
                                             value={year.value}
                                             onChange={e => {
                                                 this.onChange("year", e.target.value);
@@ -572,7 +593,6 @@ class Cron extends PureComponent {
                         </List>
                     )
                 }
-
                 {
                     showRunTime
                     && (
@@ -607,7 +627,7 @@ Cron.propTypes = {
 Cron.defaultProps = {
     onChange: noop,
     showRunTime: false,
-    value: '* * * * * ?',
+    value: '0 0 0 * * ? *',
     tabType: 'line',
     showCrontab: true
 }

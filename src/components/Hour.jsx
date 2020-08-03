@@ -83,7 +83,9 @@ export default class Hour extends PureComponent {
                                 size="small"
                                 value={start}
                                 onChange={value => {
-                                    this.changeParams("start", value);
+                                    if (value && Number(value) >= 0) {
+                                        this.changeParams("start", value);
+                                    }
                                 }}
                                 disabled={type !== "period"}
                             />
@@ -97,7 +99,9 @@ export default class Hour extends PureComponent {
                                 value={end}
                                 size="small"
                                 onChange={value => {
-                                    this.changeParams("end", value);
+                                    if (value && Number(value) >= 0) {
+                                        this.changeParams("end", value);
+                                    }
                                 }}
                                 disabled={type !== "period"}
                             />
@@ -114,7 +118,9 @@ export default class Hour extends PureComponent {
                                 size="small"
                                 value={begin}
                                 onChange={value => {
-                                    this.changeParams("begin", value);
+                                    if (value && Number(value) >= 0) {
+                                        this.changeParams("begin", value);
+                                    }
                                 }}
                                 disabled={type !== "beginInterval"}
                             />
@@ -127,7 +133,9 @@ export default class Hour extends PureComponent {
                                 size="small"
                                 value={beginEvery}
                                 onChange={value => {
-                                    this.changeParams("beginEvery", value);
+                                    if (value && Number(value) >= 0) {
+                                        this.changeParams("beginEvery", value);
+                                    }
                                 }}
                                 disabled={type !== "beginInterval"}
                             />
