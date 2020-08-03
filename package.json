@@ -1,5 +1,5 @@
 {
-  "name": "cron-editor-react",
+  "name": "@tulaoda/cron-editor",
   "version": "1.0.0",
   "description": "基于antd、react的crontab表达式生成工具",
   "main": "./dist/index",

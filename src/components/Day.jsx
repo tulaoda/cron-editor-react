@@ -4,8 +4,10 @@
  * 日期：2019.11.04
  */
 import React, { PureComponent } from "react";
-import { Radio, InputNumber, Row, Col, Select, List, Checkbox } from "antd";
+import { Radio, InputNumber, Row, Col, Select, List, Checkbox, message } from "antd";
 const { Group } = Radio;
+import { isNumber } from '../utils/index'
+
 export default class Day extends PureComponent {
     constructor(props) {
         super(props);
@@ -85,9 +87,12 @@ export default class Day extends PureComponent {
                                 placeholder="日"
                                 size="small"
                                 value={start}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1 && Number(value) <= 30) {
                                         this.changeParams("start", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "period"}
@@ -101,9 +106,12 @@ export default class Day extends PureComponent {
                                 placeholder="日"
                                 value={end}
                                 size="small"
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 2 && Number(value) <= 31) {
                                         this.changeParams("end", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "period"}
@@ -119,9 +127,12 @@ export default class Day extends PureComponent {
                                 placeholder="日"
                                 size="small"
                                 value={begin}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1) {
                                         this.changeParams("begin", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "beginInterval"}
@@ -133,9 +144,12 @@ export default class Day extends PureComponent {
                                 placeholder="天"
                                 size="small"
                                 value={beginEvery}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0) {
                                         this.changeParams("beginEvery", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "beginInterval"}
@@ -151,9 +165,12 @@ export default class Day extends PureComponent {
                                 placeholder="日"
                                 size="small"
                                 value={closeWorkDay}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1) {
                                         this.changeParams("closeWorkDay", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "closeWorkDay"}
@@ -168,9 +185,12 @@ export default class Day extends PureComponent {
                                     placeholder="天"
                                     size="small"
                                     value={last}
-                                    onChange={value => {
-                                        if (value && Number(value) >= 0) {
+                                    formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                    onChange={(value) => {
+                                        if (isNumber(value) && Number(value) >= 0) {
                                             this.changeParams("last", value);
+                                        } else {
+                                            message.info('输入不合法')
                                         }
                                     }}
                                     disabled

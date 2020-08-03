@@ -3,13 +3,15 @@
  * 作者：宋鑫鑫
  * 日期：2019.11.04
  */
-import React, { PureComponent } from "react";
-import { Radio, InputNumber, message, List, Checkbox, Select } from "antd";
-const { Group } = Radio;
+import React, { PureComponent } from 'react'
+import { Radio, InputNumber, message, List, Checkbox, Select } from 'antd'
+const { Group } = Radio
+import { isNumber } from '../utils/index'
+
 export default class Minute extends PureComponent {
     constructor(props) {
-        super(props);
-        this.formatMinuteOptions();
+        super(props)
+        this.formatMinuteOptions()
     }
 
     // formatMinuteOptions() {
@@ -23,48 +25,48 @@ export default class Minute extends PureComponent {
     // }
 
     formatMinuteOptions() {
-        this.minuteOptions = [];
+        this.minuteOptions = []
         for (let x = 0; x < 60; x++) {
-            const label = x < 10 ? `0${x}` : x;
-            const value = `${x}`;
+            const label = x < 10 ? `0${x}` : x
+            const value = `${x}`
             const ele = (
                 <Select.Option value={value} key={`${label}-${x}`}>
                     {label}
                 </Select.Option>
-            );
-            this.minuteOptions.push(ele);
+            )
+            this.minuteOptions.push(ele)
         }
     }
 
     changeParams(type, value) {
-        const state = { ...this.props.minute };
-        state[type] = value;
+        const state = { ...this.props.minute }
+        state[type] = value
         if (type === 'start') {
             if (state.end - state.start <= 1) {
-                state.end = value + 1;
+                state.end = value + 1
             }
         }
         if (type === 'end') {
             if (state.end - state.start <= 1) {
-                state.start = value - 1;
+                state.start = value - 1
             }
         }
-        this.props.onChange(state);
+        this.props.onChange(state)
     }
 
-    changeType = e => {
-        const state = { ...this.props.minute };
+    changeType = (e) => {
+        const state = { ...this.props.minute }
         // if (e.target.value === "some") {
         //     state.some = ["1"];
         // }
-        state.type = e.target.value;
-        this.props.onChange(state);
-    };
+        state.type = e.target.value
+        this.props.onChange(state)
+    }
 
     render() {
         const {
-            minute: { type, start, end, some, begin, beginEvery }
-        } = this.props;
+            minute: { type, start, end, some, begin, beginEvery },
+        } = this.props
         return (
             <div>
                 <Group value={type} onChange={this.changeType}>
@@ -83,12 +85,15 @@ export default class Minute extends PureComponent {
                                 placeholder="分"
                                 size="small"
                                 value={start}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("start", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0 && Number(value) <= 58) {
+                                        this.changeParams('start', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "period"}
+                                disabled={type !== 'period'}
                             />
                             &nbsp;到&nbsp;
                             <InputNumber
@@ -99,12 +104,15 @@ export default class Minute extends PureComponent {
                                 placeholder="分"
                                 value={end}
                                 size="small"
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("end", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1 && Number(value) <= 59) {
+                                        this.changeParams('end', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "period"}
+                                disabled={type !== 'period'}
                             />
                             &nbsp;分钟&nbsp;
                         </List.Item>
@@ -118,12 +126,15 @@ export default class Minute extends PureComponent {
                                 placeholder="分"
                                 size="small"
                                 value={begin}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("begin", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0 && Number(value) <= 59) {
+                                        this.changeParams('begin', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "beginInterval"}
+                                disabled={type !== 'beginInterval'}
                             />
                             &nbsp;分开始， 每&nbsp;
                             <InputNumber
@@ -133,32 +144,35 @@ export default class Minute extends PureComponent {
                                 placeholder="分"
                                 size="small"
                                 value={beginEvery}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("beginEvery", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1 && Number(value) <= 59) {
+                                        this.changeParams('beginEvery', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "beginInterval"}
+                                disabled={type !== 'beginInterval'}
                             />
                             &nbsp;分执行一次
                         </List.Item>
                         <List.Item>
                             <Radio value="some">具体分钟数（可多选）</Radio>
                             <Select
-                                style={{ width: "auto" }}
+                                style={{ width: 'auto' }}
                                 defaultValue={1}
                                 mode="multiple"
                                 placeholder="分钟数"
                                 size="small"
                                 value={some}
                                 showArrow
-                                onChange={value => {
+                                onChange={(value) => {
                                     if (value.length < 1) {
-                                        return message.warn("至少选择一项");
+                                        return message.warn('至少选择一项')
                                     }
-                                    this.changeParams("some", value);
+                                    this.changeParams('some', value)
                                 }}
-                                disabled={type !== "some"}
+                                disabled={type !== 'some'}
                             >
                                 {this.minuteOptions}
                             </Select>
@@ -177,6 +191,6 @@ export default class Minute extends PureComponent {
                     </List>
                 </Group>
             </div>
-        );
+        )
     }
 }

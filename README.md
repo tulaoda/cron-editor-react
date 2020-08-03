@@ -5,13 +5,13 @@ cron表达式生成工具
 ## Installation
 
 ```shell
-npm i cron-editor-react --save
+npm i @tulaoda/cron-editor-react --save
 ```
 
 ## Usage
 
 ```javascript
-import CronEditor from 'cron-editor-react';
+import CronEditor from '@tulaoda/cron-editor-react';
 
 const handleCronChange = (cronExpression) => {
   console.log(cronExpression) //0 0 0 * * ?

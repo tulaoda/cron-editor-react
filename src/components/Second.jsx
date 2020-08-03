@@ -3,13 +3,14 @@
  * 作者：宋鑫鑫
  * 日期：2019.11.04
  */
-import React, { PureComponent } from "react";
-import { Radio, InputNumber, message, List, Checkbox, Select } from "antd";
-const { Group } = Radio;
+import React, { PureComponent } from 'react'
+import { Radio, InputNumber, message, List, Checkbox, Select } from 'antd'
+const { Group } = Radio
+import { isNumber } from '../utils/index'
 export default class Second extends PureComponent {
     constructor(props) {
-        super(props);
-        this.formatSecondOptions();
+        super(props)
+        this.formatSecondOptions()
     }
 
     // formatSecondOptions() {
@@ -23,50 +24,50 @@ export default class Second extends PureComponent {
     // }
 
     changeParams(type, value) {
-        const state = { ...this.props.second };
-        state[type] = value;
+        const state = { ...this.props.second }
+        state[type] = value
         if (type === 'start') {
             if (state.end - state.start <= 1) {
-                state.end = value + 1;
+                state.end = value + 1
             }
         }
         if (type === 'end') {
             if (state.end - state.start <= 1) {
-                state.start = value - 1;
+                state.start = value - 1
             }
         }
-        this.props.onChange(state);
+        this.props.onChange(state)
     }
 
     formatSecondOptions() {
-        this.secondOptions = [];
+        this.secondOptions = []
         for (let x = 0; x < 60; x++) {
-            const label = x < 10 ? `0${x}` : x;
-            const value = `${x}`;
+            const label = x < 10 ? `0${x}` : x
+            const value = `${x}`
             const ele = (
                 <Select.Option value={value} key={`${label}-${x}`}>
                     {label}
                 </Select.Option>
-            );
-            this.secondOptions.push(ele);
+            )
+            this.secondOptions.push(ele)
         }
     }
 
     render() {
         const {
-            second: { type, start, end, begin, beginEvery, some }
-        } = this.props;
+            second: { type, start, end, begin, beginEvery, some },
+        } = this.props
         return (
             <div>
                 <Group
                     value={type}
-                    onChange={e => {
-                        const state = { ...this.props.second };
+                    onChange={(e) => {
+                        const state = { ...this.props.second }
                         // if (e.target.value !== "some") {
                         //     state.some = ["0"];
                         // }
-                        state.type = e.target.value;
-                        this.props.onChange(state);
+                        state.type = e.target.value
+                        this.props.onChange(state)
                     }}
                 >
                     <List size="small" bordered>
@@ -84,12 +85,15 @@ export default class Second extends PureComponent {
                                 placeholder="秒"
                                 size="small"
                                 value={start}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("start", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0 && Number(value) <= 58) {
+                                        this.changeParams('start', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "period"}
+                                disabled={type !== 'period'}
                             />
                             &nbsp;到&nbsp;
                             <InputNumber
@@ -100,12 +104,15 @@ export default class Second extends PureComponent {
                                 placeholder="秒"
                                 value={end}
                                 size="small"
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("end", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1 && Number(value) <= 59) {
+                                        this.changeParams('end', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "period"}
+                                disabled={type !== 'period'}
                             />
                             &nbsp;秒&nbsp;
                         </List.Item>
@@ -119,13 +126,16 @@ export default class Second extends PureComponent {
                                 placeholder="秒"
                                 size="small"
                                 value={begin}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("begin", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0 && Number(value) <= 59) {
+                                        this.changeParams('begin', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "beginInterval"}
-                            />{" "}
+                                disabled={type !== 'beginInterval'}
+                            />{' '}
                             &nbsp;秒开始， 每 &nbsp;
                             <InputNumber
                                 min={0}
@@ -134,32 +144,35 @@ export default class Second extends PureComponent {
                                 placeholder="秒"
                                 size="small"
                                 value={beginEvery}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
-                                        this.changeParams("beginEvery", value);
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0 && Number(value) <= 59) {
+                                        this.changeParams('beginEvery', value)
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
-                                disabled={type !== "beginInterval"}
-                            />{" "}
+                                disabled={type !== 'beginInterval'}
+                            />{' '}
                             &nbsp;秒执行一次
                         </List.Item>
                         <List.Item>
                             <Radio value="some">具体秒数（可多选）</Radio>
                             <Select
-                                style={{ width: "auto" }}
+                                style={{ width: 'auto' }}
                                 defaultValue={1}
                                 mode="multiple"
                                 placeholder="秒数"
                                 size="small"
                                 value={some}
                                 showArrow
-                                onChange={value => {
+                                onChange={(value) => {
                                     if (value.length < 1) {
-                                        return message.warn("至少选择一项");
+                                        return message.warn('至少选择一项')
                                     }
-                                    this.changeParams("some", value);
+                                    this.changeParams('some', value)
                                 }}
-                                disabled={type !== "some"}
+                                disabled={type !== 'some'}
                             >
                                 {this.secondOptions}
                             </Select>
@@ -178,6 +191,6 @@ export default class Second extends PureComponent {
                     </List>
                 </Group>
             </div>
-        );
+        )
     }
 }

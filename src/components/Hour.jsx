@@ -6,6 +6,8 @@
 import React, { PureComponent } from "react";
 import { Radio, InputNumber, message, List, Checkbox, Select } from "antd";
 const { Group } = Radio;
+import { isNumber } from '../utils/index'
+
 export default class Hour extends PureComponent {
     constructor(props) {
         super(props);
@@ -82,9 +84,12 @@ export default class Hour extends PureComponent {
                                 placeholder="时"
                                 size="small"
                                 value={start}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0 && Number(value) <= 22) {
                                         this.changeParams("start", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "period"}
@@ -98,9 +103,12 @@ export default class Hour extends PureComponent {
                                 placeholder="时"
                                 value={end}
                                 size="small"
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1 && Number(value) <= 23) {
                                         this.changeParams("end", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "period"}
@@ -117,9 +125,12 @@ export default class Hour extends PureComponent {
                                 placeholder="时"
                                 size="small"
                                 value={begin}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 0 && Number(value) <= 23) {
                                         this.changeParams("begin", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "beginInterval"}
@@ -132,9 +143,12 @@ export default class Hour extends PureComponent {
                                 placeholder="小时"
                                 size="small"
                                 value={beginEvery}
-                                onChange={value => {
-                                    if (value && Number(value) >= 0) {
+                                formatter={(value) => value.toString().replace(/[^\d\.]/g, '')}
+                                onChange={(value) => {
+                                    if (isNumber(value) && Number(value) >= 1 && Number(value) <= 23) {
                                         this.changeParams("beginEvery", value);
+                                    } else {
+                                        message.info('输入不合法')
                                     }
                                 }}
                                 disabled={type !== "beginInterval"}

@@ -25,14 +25,6 @@ let webpackConfig = {
                             plugins: [
                                 ["@babel/plugin-proposal-decorators", { legacy: true }],
                                 ["@babel/plugin-proposal-class-properties", { loose: true }],
-                                // [
-                                //     "import",
-                                //     {
-                                //         libraryName: "antd",
-                                //         libraryDirectory: "lib",
-                                //         style: true
-                                //     }
-                                // ],
                                 "@babel/plugin-transform-runtime"
                             ]
                         }
