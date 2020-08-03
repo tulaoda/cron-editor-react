@@ -1,33 +1,15 @@
-# 1.0.0 (2020-03-27)
-- 版本号重置，组件名称修改，以下作为存档
-  
-# 2.0.0 (2019-11-28)
-- 新增 API:tabType、showCrontab 
+# Changelog
 
-# 1.0.9 (2019-11-21)
-### 业务需求修改
-> 日：
-- 不指定：‘日’不指定和‘周’不指定，有且仅有一个不指定
-- 第一个值小于等于第二个值
-- 周期：几日开始，每几天执行一次
-- 本月最后一天，不能填，只能是最后一天
-- 具体天数，默认第一天
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-> 月：
-- 不指定：删掉
-- 周期：第一个值小于等于第二个值
-- 具体月数，默认第一月
+## 1.0.0 (2020-08-03)
 
-> 星期：
-- 不指定：‘日’不指定和‘周’不指定，有且仅有一个不指定
-- 周期：第一个值小于等于第二个值
-- 具体星期数：默认星期一
 
-- 暂时禁用Input修改cron
-# 1.0.7 (2019-11-07)
-- 暂时禁用Input修改cron
+### Features
 
-# 1.0.6 (2019-11-07)
-- 增加propTypes 校验
-- 可选显示客户端计算周期执行时间
-- 修改默认值
+* fix bug and change file tree ([49ed092](https://github.com/tulaoda/cron-editor-react/commit/49ed092db8b429f35c7ac2c85ab63c1a8b5a30c8))
+
+
+### Bug Fixes
+
+* fix bug ([643b44b](https://github.com/tulaoda/cron-editor-react/commit/643b44bb8319dc12dae42cab7625eb3ec47e1257))
