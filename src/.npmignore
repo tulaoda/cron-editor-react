@@ -1,0 +1,12 @@
+npm-debug.log
+npm-debug.log.*
+node_modules/
+.DS_Store
+package-lock.json
+yarn.lock
+yarn-error.log
+src/
+stories/
+test/
+storybook-static/
+App.jsx
